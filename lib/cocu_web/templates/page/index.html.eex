@@ -1,0 +1,135 @@
+<div id="homepage-container">
+  <div class="background">
+    <div class="ui center aligned container grid main-banner">
+
+      <img class="logo" src="/images/logo.png">
+
+      <div class="title ui">
+        <span class="light-text">CO-CREATIVE </span>
+        <span class="bold-text">UNIVERSE</span>
+      </div>
+
+      <p class="fifteen wide phone twelve wide computer column description">
+       <%= gettext "A world where everyone can follow their passion and propose projects that make the world a more beautiful place." %>
+      </p>
+
+      <div class="row">
+        <a href="/project/new" class="ui inverted button"><%= gettext "Launch a Project" %></a>
+      </div>
+
+      <div class="mouse">
+        <div class="scroll"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="nearly-deadline">
+
+    <p class="nearly-deadline-title section-title"><%= String.upcase(gettext "Nearing deadline") %> </p>
+
+    <div class="project-container ui three column doubling stackable container grid">
+      <%= for project <- @projects_close_deadline do %>
+          <div class="column project" onclick=" <%= "window.location='/project/show/" <> Integer.to_string(project.id) <> "'" %>">
+            <div class="image-container">
+              <%= if (photo = List.first(get_project_photos(project.id)))!= nil do %>
+                  <img src="<%=photo%>">
+                  <% else %>
+                    <img src="/images/default-project-image.png">
+                    <% end %>
+            </div>
+            <h2 class="project-title">
+              <%= link project.vision_name, to: project_path(@conn, :show, project.id)%>
+            </h2>
+            <p class="project-planning"> <%= project.planning %> </p>
+            <div class="ui indicating progress">
+              <div class="bar" style="width: <%= (project.current_fund/project.fund_asked)*100 %>%"></div>
+              <div class="label"><%= round((project.current_fund/project.fund_asked)*100) %>%</div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="more-projects">
+    <a href="/explore?order=nearing-deadline"> 
+      <i class="chevron down icon huge" ></i>
+    </a>
+  </div>
+
+
+  <div class="categories">
+    <p class="categories-title section-title"><%= String.upcase(gettext "You may be interested in") %> </p>
+
+    <!--div class=""-->
+    <div class="ui three column doubling stackable container grid">
+      <%= for community <- get_communities() do %>
+      <div class="column">
+        <div class="category" onclick=" <%= "window.location='/community/" <> Integer.to_string(community.id) <> "'" %>">
+          <div class="img-holder">
+          <%= if community.picture_path != "" do %>
+                <img src="<%=community.picture_path%>">
+                <% else %>
+                  <img src="images/universe_mask.jpg">
+                  <% end %>
+          </div>
+          <span>
+            <h2 class="name"><%=community.name%></h2>
+            <%=if Guardian.Plug.current_resource(@conn) do %>
+                  <button name="<%=community.id%>" class="community-user-follow-button"> 
+              <%= if user_follows_community(Guardian.Plug.current_resource(@conn).id, community.id) do %>
+                  <%= String.upcase("Following") %> 
+              <% else %>
+                  <%=  String.upcase("Follow") %> 
+                  </button>
+              <%end%>
+            <% else %>
+             <a class="community-follow-button" href="/user"> <%= String.upcase("Follow") %> </a>
+            <%end%>
+          </span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+   <div class="more-projects">
+    <a href="/community"> 
+      <i class="chevron down icon huge" ></i>
+    </a>
+  </div>
+
+  <div id="our-mission">
+    <p class="our-mission-title section-title"> <%= String.upcase(gettext "Our mission") %> </p>
+
+    <div class="ui three column doubling stackable container relaxed grid">
+      <div class="column">
+        <div class="ui grid center goal">
+          <img class="row" src="/images/003-donation-1.svg">
+          <h2 class="row"><%= String.upcase("Facilitate ") %></h2>
+          <p class="row mission">Facilitate the co-creation of a resonant world, where we can live as awake human beings in harmony and natural abundance.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui grid center goal">
+          <img class="row" src="/images/lightbulb.svg">
+          <h2 class="row"><%= String.upcase("Inspire") %></h2>
+          <p class="row mission">Serves as an online meeting point to share ideas, inspiration and proposals.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui grid center goal">
+          <img class="row" src="/images/002-donation.svg">
+          <h2 class="row"><%= String.upcase("Support") %></h2>
+          <p class="row mission"> Support projects through funding, make connections and suggestions for improvement.
+          </p>
+        </div>
+      </div>
+      <div class="centered aligned row description">
+         Take a look at the communities and connect to those that resonate!
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div id="header">
+<h2 class="title"><%= String.upcase(gettext "Edit Community") %></h2>
+<div>
+
+<%= render "form.html", Map.put(assigns, :action, community_path(@conn, :update, @community)) %>
+
+<span><%= link "Back", to: community_path(@conn, :index) %></span>

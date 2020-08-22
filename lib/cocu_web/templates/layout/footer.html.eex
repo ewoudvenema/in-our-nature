@@ -1,0 +1,19 @@
+<div class="footer ui centered grid">
+            <div class="center aligned column logo"><img class="ui large image" src="/images/logo.png"></div>
+
+            <div class="stackable row links">
+              <div class="center aligned column column-info"><a href="/">Home</a></div>
+              <div class="center aligned column column-info"><a href="/explore">Projects</a></div>
+              <div class="center aligned column column-info"><a href="/community">Communities</a></div>
+            </div>
+             <div class="stackable row icons">
+              <div class="center aligned column column-info"><i class="facebook f icon"></i></div>
+              <div class="center aligned column column-info"><i class="twitter icon"></i></div>
+              <div class="center aligned column column-info"><i class="mail icon"></i></div>
+            </div>
+            <div class="row">
+              <hr class="separator">
+            </div>
+            
+             <div class="five wide column center aligned description"> Please join us in the co-creative universe </div>
+</div>

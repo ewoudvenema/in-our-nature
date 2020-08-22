@@ -1,0 +1,24 @@
+<h2>Listing Pagenotfound</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for page_not_found <- @pagenotfound do %>
+    <tr>
+
+      <td class="text-right">
+        <span><%= link "Show", to: page_not_found_path(@conn, :show, page_not_found), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: page_not_found_path(@conn, :edit, page_not_found), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: page_not_found_path(@conn, :delete, page_not_found), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Page not found", to: page_not_found_path(@conn, :new) %></span>

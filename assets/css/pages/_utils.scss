@@ -1,0 +1,47 @@
+.mouse{
+    position: absolute;
+    width: 22px;
+    height: 55px;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -12px;
+    border-radius: 15px;
+    border: 2px solid white;
+    animation: intro 1.5s;
+
+    display: none;
+    @media(min-width:576px){
+        display: none;
+    }
+    @media(min-width:768px){
+        display: none;
+    }
+    @media(min-width:992px){
+        display: block;
+    }
+    @media(min-width:1200px){
+        display: block;
+    }
+}
+
+
+.scroll{
+    display: block;
+    width: 5px;
+    height: 5px;
+    margin: 6px 6px 10px -2px;
+    border-radius: 4px;
+    background:white;
+    animation: finger 1.5s infinite;
+
+    @keyframes intro { 
+        0% {opacity: 0; transform: translateY(40px);} 
+        100% {opacity: 1; transform: translateY(0);} 
+    } 
+     
+    @keyframes finger { 
+        0% {opacity: 1} 
+        100% {opacity: 0; transform: translateY(20px);} 
+    } 
+
+}

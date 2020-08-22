@@ -1,0 +1,61 @@
+<div id="create-community" class="container ui grid">
+  <div class="sixteen wide column ui form">
+    <%= form_for @changeset, @action, [multipart: true], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "what is the name of your community?")%></label>
+        <%= text_input f, :name, class: "form-control" %>
+        <label class="error-info"><%= error_tag f, :name %><label>
+      </div>
+      <!--<div class="form-group field">
+        <label><%= String.upcase(gettext "is this a public community or a private group (invite-only)?")%></label>
+        <div id="community-privacy-options">
+          <button id="toggle-community" class="ui labeled button">
+            <div class="ui icon button"><i class="users icon"></i></div>
+            <div class="ui basic label">
+              <%= String.capitalize(gettext "community")%>
+            </div>
+          </button>
+          <button id="toggle-group" class="ui left labeled button">
+            <div class="ui basic label">
+              <%= String.capitalize(gettext "group")%>
+            </div>
+            <div class="ui icon button"><i class="lock icon"></i></div>
+          </button>
+        </div>
+      </div>-->
+      <div class="form-group field">
+          <span><%= String.upcase(gettext "")%></span>
+        <div class="ui checkbox">
+          <%= checkbox f, :is_group, class: "form-control" %>
+          <label><%= String.upcase(gettext "make this is a private group (invite-only)")%></label>
+        </div>
+        <label class="error-info"><%= error_tag f, :is_group %></label>
+      </div>
+
+        <input id="founder-id-hidden" class="form-control" name="community[founder_id]" value="<%=Guardian.Plug.current_resource(@conn).id%>">
+
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "give us a small description of your community")%></label>
+        <%= textarea f, :description, class: "form-control", rows: 3 %>
+        <label class="error-info"><%= error_tag f, :description %></label>
+      </div>
+
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "Give us a image to represent the community")%></label>
+        <%= file_input f, :picture_path, class: "form-control" %>
+        <%= error_tag f, :picture_path %>
+      </div>
+
+      <div class="ui center aligned segment form-group">
+        <% var = String.upcase(gettext "submit")%>
+        <%= submit var, class: "ui centered aligned button submit-community"%>
+      </div>
+    <% end %>
+  </div>
+</div>

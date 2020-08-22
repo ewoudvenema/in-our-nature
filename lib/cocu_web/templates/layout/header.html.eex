@@ -1,0 +1,265 @@
+<div id="nav-bar-header" class="ui stackable equal width grid computer only">
+    <div class="middle aligned content column">
+        <a id="logo" class="item" href="/">
+            <span class="cocu">C</span>
+            <span class="cocu-o">O</span>
+            <span class="cocu">CU</span>
+        </a>
+        <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+            <% user_id = Guardian.Plug.current_resource(@conn).id %>
+            <div id="user-communities" class="ui scrolling inline pointing dropdown">
+                <div class="default text"><%= gettext "Your Communities"%></div>
+                <i class="dropdown icon" ></i>
+                <div class="menu menu-border">
+                    <div id="user-community-search" class="ui icon search input">
+                        <i class="search icon"></i>
+                        <input placeholder="Search for a community..." type="text">
+                    </div>
+                    <%= list_user_communities(user_id) |> Enum.map(fn(x) -> display_user_community(x) end)%>
+                </div>
+            </div>
+        <% end %>
+        
+        <div id="explore-dropdown-menu" class="ui scrolling inline pointing dropdown">
+            <%= gettext "Explore" %>
+            <i class="dropdown icon"></i>
+            <div class="menu menu-border">
+                <div class="item"><a class="item" href="/explore"><%= gettext "Projects" %></a></div>
+                <div class="item"><a id="explore-communities" class="item" href="/community"><%= gettext "Communities" %></a></div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="center aligned middle aligned content column">
+        <div id="search-bar" class="ui fluid large search">
+            <div class="ui icon input">
+                <%= if assigns[:project_search_name] do %>
+                    <input id="name-project" value="<%= @project_search_name %>" class="prompt" type="text" placeholder='<%= gettext "Search For Projects..." %>'>
+                <% else %>
+                    <input id="name-project" class="prompt" type="text" placeholder='<%= gettext "Search For Projects..." %>'>
+                <% end %>
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </div>
+    <div class="middle aligned content right aligned column">
+        <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+             <% id = Guardian.Plug.current_resource(@conn).id%>
+            <% name = Guardian.Plug.current_resource(@conn).name %>
+             <% first_name = Enum.at(String.split(name, " "),0) %>
+             <% photo = Guardian.Plug.current_resource(@conn).picture_path %>
+            <div id="nav-user-info">
+               <%= if photo != nil do %>
+                    <img class="ui avatar image" src="<%= photo %>">
+                <% else %>
+                <img class="ui avatar image" src="/images/default-user.png">
+               <% end %>
+               <div id="user-dropdown" class="ui inline pointing dropdown" >
+                 <span><a><%= first_name %></a></span>
+                <% [notification_count] = get_notification_count(id)%>
+                <%= if notification_count > 0 do %>
+                    <div id="nav-user-notification-count" class="ui circular segment">
+                    <%= notification_count %>
+                    </div>
+                <%end%>
+                 <i class="dropdown icon"></i>
+                 <div id="user-dropdown-menu" class="menu menu-border">
+                   <%= link (gettext "My Profile"), to: user_path(@conn, :edit, id), class: "item username-padding"%>
+                   <%= link (gettext "Create Project"), to: project_path(@conn, :new), class: "item username-padding"%>
+                   <%= link (gettext "Create Community"), to: community_path(@conn, :new), class: "item username-padding"%>
+                   <%= link (gettext "Log Out"), to: user_path(@conn, :logout), method: :post, class: "item logout-button"%>
+                 </div>
+               </div>
+          </div>
+        <%end%>
+         <%= if Guardian.Plug.current_resource(@conn) == nil do %>
+             <%= link "Sign In", to: user_path(@conn, :index), class: "item sign-in-button", id: "sign-in-button-id" %>
+             <%= link "Sign Up", to: user_path(@conn, :new), class: "item sign-up-button", id: "sign-up-button-id" %>
+        <%end%>
+        <div class="last-column-language">
+        <div id="active-language">
+            <%= if String.equivalent?(get_locale(@conn),"en") do %>
+                <a class="english row item item-language">
+                    <label class="language-name"><%= gettext "English" %></label>
+                    <i class="gb flag"></i>
+                    <i id="dropdown-icon-language" class="dropdown icon"></i>
+                </a>
+            <%end%>
+            <%= if String.equivalent?(get_locale(@conn),"pt") do %>
+                <a class="portuguese row item item-language">
+                    <label class="language-name"><%= gettext "Portuguese" %></label>
+                    <i class="pt flag"></i>
+                    <i id="dropdown-icon-language" class="dropdown icon"></i>
+                </a>
+            <%end%>
+             <%= if String.equivalent?(get_locale(@conn),"es") do %>
+                <a class=" spanish row item item-language">
+                    <label class="language-name"><%= gettext "Spanish" %></label>
+                    <i class="es flag"></i>
+                    <i id="dropdown-icon-language" class="dropdown icon"></i>
+                </a>
+            <%end%>
+            <%= if String.equivalent?(get_locale(@conn),"nl") do %>
+                <a class=" dutch row item item-language">
+                    <label class="language-name"><%= gettext "Dutch" %></label>
+                    <i class="nl flag"></i>
+                    <i id="dropdown-icon-language" class="dropdown icon"></i>
+                </a>
+            <%end%>
+        </div>
+        </div>
+        <div class="available-languages menu-border">
+            <div class="ui grid link list">
+                <%= if !String.equivalent?(get_locale(@conn),"en") do %>
+                    <a class="english row item item-language" href=<%= "/en" <> assigns[:conn].request_path %>>
+                        <label class="language-name"><%= gettext "English" %></label>
+                        <i class="gb flag"></i>
+                    </a>
+                <%end %>
+
+                <%= if !String.equivalent?(get_locale(@conn),"pt") do %>
+                <a class="portuguese row item item-language" href=<%= "/pt" <> assigns[:conn].request_path %>>
+                    <label class="language-name"><%= gettext "Portuguese" %></label>
+                    <i class="pt flag"></i>
+                </a>
+                <%end%>
+
+                <%= if !String.equivalent?(get_locale(@conn),"es") do %>
+                <a class="spanish row item item-language" href=<%= "/es" <> assigns[:conn].request_path %>>
+                    <label class="language-name"><%= gettext "Spanish" %></label>
+                    <i class="es flag"></i>
+                </a>
+                <%end%>
+                <%= if !String.equivalent?(get_locale(@conn),"nl") do %>
+                <a class="dutch row item item-language" href=<%= "/nl" <> assigns[:conn].request_path %>>
+                    <label class="language-name"><%= gettext "Dutch" %></label>
+                    <i class="nl flag"></i>
+                </a>
+                <%end%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="nav-bar-header-mobile" class="ui grid tablet mobile only">
+
+    <a href="/" class="item logo">
+            <span class="cocu">C</span>
+            <span class="cocu-o">O</span>
+            <span class="cocu">CU</span>
+    </a>
+    <div id="toggle">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+    </div>
+
+    <div id="menu-mobile">
+        <div class="middle aligned content column">
+        <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+            <% user_id = Guardian.Plug.current_resource(@conn).id %>
+            <div class="ui accordion">
+                <div class="item title">
+                    <%= gettext "Your Communities"%>
+                </div>
+                <div class="content">
+                    <% user_communities = list_user_communities(user_id) %>
+                    <%= user_communities
+                        |> Enum.map(fn(x) -> display_user_community(x) end)%>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+        <%end%>
+            <a href="/explore" class="item"><%= gettext "Projects" %></a>
+            <div class="ui divider"></div>
+            <a href="/community" class="item"><%= gettext "Communities" %></a>
+            <div class="ui divider"></div>
+             <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+             <% id = Guardian.Plug.current_resource(@conn).id%>
+             <div class="mobile-user">
+              <% name = Guardian.Plug.current_resource(@conn).name %>
+              <% first_name = Enum.at(String.split(name, " "),0) %>
+                 <%= if photo != nil do %>
+                 <img class="ui avatar image" src="<%= photo %>">
+                 <% else %>
+                 <img class="ui avatar image" src="/images/default-user.png">
+                 <% end %>
+               <%= link first_name, to: user_path(@conn, :edit, id), class: "item username-padding"%>
+             </div>
+             <div class="ui divider"></div>
+            <div>
+             <%= link (gettext "Create Project"), to: project_path(@conn, :new), class: "item"%>
+             <div class="ui divider"></div>
+             <%= link (gettext "Create Community"), to: community_path(@conn, :new), class: "item"%>
+             <div class="ui divider"></div>
+             <%= link (gettext "Log Out"), to: user_path(@conn, :logout), method: :post, class: "item"%>
+             </div>
+            <%end%>
+            <%= if Guardian.Plug.current_resource(@conn) == nil do %>
+                <%= link "Sign In", to: user_path(@conn, :index), class: "item"%>
+                <div class="ui divider"></div>
+                <%= link "Sign Up", to: user_path(@conn, :new), class: "item" %>
+            <%end%>
+          <div class="ui divider"></div>
+            <div id="active-language">
+                <%= if String.equivalent?(get_locale(@conn),"en") do %>
+                <a class="english row item item-language">
+                    <label class="language-name"><%= gettext "English" %></label>
+                    <i class="gb flag"></i>
+                    <i id="dropdown-icon-language" class="dropdown icon"></i>
+                </a>
+                <%end%>
+                <%= if String.equivalent?(get_locale(@conn),"pt") do %>
+                    <a class="portuguese row item item-language">
+                        <label class="language-name"><%= gettext "Portuguese" %></label>
+                        <i class="pt flag"></i>
+                        <i id="dropdown-icon-language" class="dropdown icon"></i>
+                    </a>
+                <%end%>
+                <%= if String.equivalent?(get_locale(@conn),"es") do %>
+                    <a class=" spanish row item item-language">
+                        <label class="language-name"><%= gettext "Spanish" %></label>
+                        <i class="es flag"></i>
+                        <i id="dropdown-icon-language" class="dropdown icon"></i>
+                    </a>
+                <%end%>
+                <%= if String.equivalent?(get_locale(@conn),"nl") do %>
+                    <a class=" dutch row item item-language">
+                        <label class="language-name"><%= gettext "Dutch" %></label>
+                        <i class="nl flag"></i>
+                        <i id="dropdown-icon-language" class="dropdown icon"></i>
+                    </a>
+                <%end%>
+            </div>
+            <div class="available-languages">
+                 <%= if !String.equivalent?(get_locale(@conn),"en") do %>
+                    <a class="english row item item-language" href=<%= "/en" <> assigns[:conn].request_path %>>
+                        <i class="gb flag"></i>
+                        <label class="language-name"><%= gettext "English" %></label>
+                    </a>
+                <%end %>
+
+                 <%= if !String.equivalent?(get_locale(@conn),"pt") do %>
+                <a class="portuguese row item item-language" href=<%= "/pt" <> assigns[:conn].request_path %>>
+                    <i class="pt flag"></i>
+                    <label class="language-name"><%= gettext "Portuguese" %></label>
+                </a>
+                <%end%>
+
+                 <%= if !String.equivalent?(get_locale(@conn),"es") do %>
+                <a class="spanish row item item-language" href=<%= "/es" <> assigns[:conn].request_path %>>
+                    <i class="es flag"></i>
+                    <label class="language-name"><%= gettext "Spanish" %></label>
+                </a>
+                <%end%>
+                 <%= if !String.equivalent?(get_locale(@conn),"nl") do %>
+                <a class="dutch row item item-language" href=<%= "/nl" <> assigns[:conn].request_path %>>
+                    <i class="nl flag"></i>
+                    <label class="language-name"><%= gettext "Dutch" %></label>
+                </a>
+                <%end%>
+            </div>
+        </div>
+    </div>
+</div>

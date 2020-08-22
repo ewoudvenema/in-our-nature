@@ -1,0 +1,249 @@
+<div id="explore-page">
+  <div id="cover">
+  </div>
+  <div class="ui grid">
+    <div class="one wide column filter-grid computer only"></div>
+    <div class="three wide column filter-grid computer only">
+      <h4 class="ui dividing header">
+        <%=String.upcase("projects")%>
+      </h4>
+      <div class="filter">
+        <div class="filter-name">
+          <%= String.upcase("Project State") %>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-state" type="checkbox" name="presentation">
+          <label>
+            <%= String.upcase("Presentation")%>
+          </label>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-state" type="checkbox" name="funding">
+          <label>
+            <%= String.upcase("Funding")%>
+          </label>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-state" type="checkbox" name="creation">
+          <label>
+            <%= String.upcase("Creation")%>
+          </label>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="filter-name">
+          <%= String.upcase("Impact") %>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-impact" type="checkbox" name="regional">
+          <label>
+            <%= String.upcase("Regional")%>
+          </label>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-impact" type="checkbox" name="national">
+          <label>
+            <%= String.upcase("National")%>
+          </label>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-impact" type="checkbox" name="international">
+          <label>
+            <%= String.upcase("International")%>
+          </label>
+        </div>
+        <div class="ui checkbox">
+          <input class="project-impact" type="checkbox" name="global">
+          <label>
+            <%= String.upcase("Global")%>
+          </label>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="filter-name filter-dropdown-categories">
+          <%= String.upcase("Categories") %>
+            <i class="angle down icon"></i>
+        </div>
+        <div class="list-categories">
+          <%= for category <- get_categories() do %>
+            <div class="ui checkbox">
+              <input class="project-category" type="checkbox" name="<%= category.id %>">
+              <label>
+                <%= String.upcase(category.name)%>
+              </label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+     <% if Guardian.Plug.current_resource(@conn) do %>
+      <div class="filter">
+        <div class="filter-name filter-dropdown-communities">
+          <%= String.upcase("Followed Communities") %>
+            <i class="angle down icon"></i>
+        </div>
+      </div>
+      <div class="list-communities">
+          <%= for community <- get_communities(Guardian.Plug.current_resource(@conn).id) do %>
+            <div class="ui checkbox">
+              <input class="project-community" type="checkbox" name="<%= community.community_id %>">
+              <label>
+                <%= String.upcase(community.name)%>
+              </label>
+            </div>
+            <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="sixteen wide tablet mobile aligned centered column ui grid mobile tablet only mobile-filter-grid">
+      <div class="filter">
+        <h4 class="ui dividing header filter-name state">
+          <%= String.upcase("Project State") %>
+            <i class="plus icon"></i>
+        </h4>
+        <div class="list-state-mobile">
+          <div class="ui checkbox">
+            <input class="project-state" type="checkbox" name="presentation">
+            <label>
+              <%= String.upcase("Presentation")%>
+            </label>
+          </div>
+          <div class="ui checkbox">
+            <input class="project-state" type="checkbox" name="funding">
+            <label>
+              <%= String.upcase("Funding")%>
+            </label>
+          </div>
+          <div class="ui checkbox">
+            <input class="project-state" type="checkbox" name="creation">
+            <label>
+              <%= String.upcase("Creation")%>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="filter">
+        <h4 class="ui dividing header filter-name impact">
+          <%= String.upcase("Impact") %>
+            <i class="plus icon"></i>
+        </h4>
+        <div class="list-impact-mobile">
+          <div class="ui checkbox">
+            <input class="project-impact" type="checkbox" name="regional">
+            <label>
+              <%= String.upcase("Regional")%>
+            </label>
+          </div>
+          <div class="ui checkbox">
+            <input class="project-impact" type="checkbox" name="national">
+            <label>
+              <%= String.upcase("National")%>
+            </label>
+          </div>
+          <div class="ui checkbox">
+            <input class="project-impact" type="checkbox" name="international">
+            <label>
+              <%= String.upcase("International")%>
+            </label>
+          </div>
+          <div class="ui checkbox">
+            <input class="project-impact" type="checkbox" name="global">
+            <label>
+              <%= String.upcase("Global")%>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="filter">
+        <h4 class="ui dividing header filter-name category">
+          <%= String.upcase("Categories") %>
+            <i class="plus icon"></i>
+        </h4>
+        <div class="list-categories-mobile">
+          <%= for category <- get_categories() do %>
+            <div class="ui checkbox">
+              <input class="project-category" type="checkbox" name="<%= category.id %>">
+              <label>
+                <%= String.upcase(category.name)%>
+              </label>
+            </div>
+            <% end %>
+        </div>
+      </div>
+      <% if Guardian.Plug.current_resource(@conn) do %>
+      <div class="filter">
+        <h4 class="ui dividing header filter-name community">
+          <%= String.upcase("Followed Communities") %>
+            <i class="plus icon"></i>
+        </h4>
+      </div>
+      <div class="list-communities-mobile">
+          <%= for community <- get_communities(Guardian.Plug.current_resource(@conn).id) do %>
+            <div class="ui checkbox">
+              <input class="project-community" type="checkbox" name="<%= community.community_id %>">
+              <label>
+                <%= String.upcase(community.name)%>
+              </label>
+            </div>
+            <% end %>
+      </div>
+       <% end %>
+    </div>
+    <div class="sixteen wide tablet eleven wide computer sixteen wide mobile column ui grid projects-grid filter-grid">
+      <div class="fifteen wide column right aligned computer only">
+        <select id="orderby" class="ui dropdown">
+          <option value="">Ordered by</option>
+          <option value="nearing-deadline">Nearing Deadline</option>
+          <option value="popularity">Popularity</option>
+          <option value="newest">Newest</option>
+          <option value="most-funded">Most Funded</option>
+        </select>
+      </div>
+      <div class="ui grid stackable projects">
+        <%= for project <- get_all_projects([], [], [], [], @project_search_name, @project_order) do %>
+          <div class="five wide column project" onclick=" <%= ("window.location='/project/show/" <> Integer.to_string(project.id)) <> "'" %>">
+            <div class="ui fluid image project-image">
+              <%= if (photo = List.first(get_project_photos(project.id)))!= nil do %>
+                <img class="ui centered image " src="<%=photo%>">
+                <% else %>
+                  <img class="ui centered image " src="/images/default-project-image.png">
+                  <% end %>
+                    <div class="ui ribbon label">
+                      <%=String.upcase(project.category) %>
+                    </div>
+            </div>
+            <div class="project-phase">
+              <%= case project.state do %>
+                <%=  "presentation" -> %>
+                <i class="puzzle basket icon huge"></i>
+                <%  "funding" -> %>
+                <i class="shopping basket icon huge"></i>
+                <%  "creation" -> %>
+                <i class="paint brush icon"></i>
+              <% end %>
+              <%= String.upcase(project.state) %>
+            </div>
+            <div class="project-title">
+              <%= project.vision_name %>
+            </div>
+            <div class="project-phase-description">
+              <%= project.vision %>
+            </div>
+            <div class="funding-state">
+              <div id="progress" class="ui progress blue" data-total="100">
+                <div class="bar" style='width: <%= round((project.current_fund/project.fund_asked)*100) %>%'>
+                  <div class="progress"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-presentation">
+              <%= round((project.current_fund/project.fund_asked)*100) %>%
+            </div>
+          </div>
+        <% end %>
+    </div>
+        <div class="ui pagination menu">
+          <a class="item prev-page">Previous Page</a>
+          <a class="item next-page">Next Page</a>
+        </div>
+  </div>
+</div>

@@ -1,0 +1,700 @@
+@import "stripe";
+
+div.align-right {
+  * {
+    float: right;
+  }
+}
+
+
+
+#user {
+  display: inline-flex;
+
+  #username {
+    vertical-align: middle;
+    line-height: 30px;
+    margin-left: 4px;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+  }
+}
+
+.error-info {
+  font-style: italic;
+  color: #c0392b !important;
+}
+
+#project_location {
+  margin-top: 10px;
+}
+
+.cancel-button {
+  right: 0px;
+  position: absolute;
+}
+
+#calendar {
+  .label {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  #project_fund_limit_date {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+}
+
+#create-project {
+  border-radius: 2px;
+  margin-bottom: 100px;
+  text-align: left;
+  #founder-id-hidden {
+    display: none;
+  }
+  .alert.alert-danger {
+    font-style: italic;
+    color: #c0392b !important;
+    padding-bottom: 10px;
+    font-size: 1em;
+  }
+  .form {
+    padding-top: 50px;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .ui.labeled.input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #calendarInput {
+    border: none;
+  }
+  label {
+    color: $primary-color;
+    font-weight: bolder;
+    font-size: 0.85em;
+  }
+  .ui.label {
+    color: $primary-color;
+    font-weight: bold;
+  }
+  input,
+  textarea,
+  select {
+    background-color: $background-primary-color;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: $primary-color;
+  }
+  .ui.button {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+  }
+  .ui.button:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+  .ui.labeled.input {
+    border-bottom: none;
+    width: 100%;
+    text-align: center;
+
+    .ui.center {
+      width: 100%;
+    }
+  }
+  select {
+    margin-top: 14px;
+  }
+  .ui.segment {
+    box-shadow: none;
+    border: none;
+    background-color: $background-primary-color !important;
+  }
+  .ui.search.dropdown.selection,
+  .location-margin {
+    top: 10px;
+  }
+  .images {
+    margin-bottom: 20px;
+    .image_input {
+      span {
+        padding: 5px;
+        i {
+          padding-left: 6px;
+          padding-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+#project-information {
+  display: flex;
+}
+
+#projectPage {
+  padding-top: 70px;
+  margin-bottom: 30px;
+
+  .chevron {
+    font-size: 4em !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+  .center-children > * {
+    margin: auto;
+  }
+
+  #stripe-connect-btn {
+    padding: 1px;
+  }
+
+  .username-info {
+    .username-by {
+      font-weight: lighter;
+      font-size: 1em;
+    }
+    .username {
+      font-style: italic;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+  }
+  #stripe-image {
+    padding-left: 0;
+  }
+  #project-current-state,
+  #project-id {
+    display: none;
+  }
+  .center-vertically {
+    display: flex !important; //Override default column behaviour
+    align-items: center;
+    justify-content: center;
+  }
+  .project-phase {
+    color: rgb(175, 175, 175);
+    &.selected {
+      color: $primary-color;
+    }
+  }
+  &.ui.checkbox label {
+    color: inherit;
+    display: none;
+  }
+  .project-tag {
+    font-style: italic;
+    font-family: $font-type-body;
+  }
+  .project-website {
+    font-size: 120%;
+    font-family: $font-type-body;
+    a {
+      color: $tertiary-color !important;
+    }
+    a:hover {
+      color: $secondary-color !important;
+    }
+  }
+  .project-plan,
+  .project-benefit {
+    font-family: $font-type-body;
+  }
+  .project-description {
+    font-family: $font-type-body;
+    padding-bottom: 10px;
+    margin-left: 1rem;
+  }
+  .project-params {
+    font-family: $font-type-body;
+    margin-left: 1rem;
+    .collum {
+      font-size: 120%;
+      margin-right: 10px;
+    }
+  }
+  .project-countdown {
+    font-size: 250%;
+    font-weight: 900;
+    color: $primary-color;
+    margin-right: 5px; //add space to the right
+  }
+  .project-days-to-go {
+    vertical-align: baseline;
+  }
+  .project-pledged {
+    font-size: 125%;
+    font-weight: 900;
+    color: $primary-color;
+  }
+  .project-goal {
+    font-size: 125%;
+    font-weight: 900;
+    color: $primary-color;
+  }
+  .ui.progress {
+    background: $secondary-color;
+    border-radius: 0;
+    &.blue .bar {
+      border-radius: 0;
+      background-color: $primary-color;
+    }
+  }
+  .center-block {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .info-extra {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  #donate-form {
+    border-bottom: none;
+  }
+  #donate-button {
+    background: $primary-color;
+    color: white;
+  }
+  .full-bar {
+    .bar {
+      min-width: 100%;
+    }
+  }
+  .ui.button.project-donate-button {
+    background: $primary-color;
+    color: white;
+    border: 1px solid $primary-color;
+    font-size: 1.2em;
+    padding: 10px 50px;
+  }
+  .ui.button.project-donate-button:hover {
+    background: $background-primary-color;
+    color: $primary-color;
+  }
+  .presentation {
+    padding-bottom: 50px;
+  }
+
+  button.blue-button {
+    font-size: 1.2em;
+    padding: 10px 40px;
+    border: 2px solid $primary-color;
+    background-color: $background-primary-color;
+    color: $primary-color;
+
+    &.active {
+      background-color: $primary-color;
+      color: $background-primary-color;
+    }
+  }
+
+  #project-info {
+    text-align: center;
+  }
+
+  #project-phases {
+    font-size: 0.75em;
+    padding-bottom: 0;
+  }
+  .ui.divider {
+    margin: 8px;
+  }
+  .project-title {
+    font-size: 2em;
+    font-family: $font-type;
+    line-height: 1.6em;
+    font-weight: 600;
+    margin-left: 0.5em;
+    margin-bottom: 0;
+    display: inline-block;
+
+    h1 {
+      overflow: hidden;
+    }
+  }
+  .project-website {
+    font-size: 1em;
+    margin-top: 25px;
+    background: transparent;
+    border: 1.2px solid $primary-color;
+    color: $primary-color;
+    padding: 6px 15px;
+  }
+  .project-website:hover {
+    font-size: 1em;
+    margin-top: 25px;
+    background: rgba(165, 164, 164, 0.027);
+    border: 1.2px solid $primary-color;
+    color: $primary-color;
+  }
+  .ui.black.ribbon.label {
+    background-color: $primary-color !important;
+    border-color: $tertiary-color !important;
+  }
+  .click-rate {
+    font-size: 4vh;
+    color: #848484;
+
+    a {
+      color: inherit;
+      font-size: 2.7vh;
+      margin-left: 20px;
+    }
+
+    i {
+      margin-right: 2px;
+    }
+
+    .button-description {
+      font-size: 1.5vh;
+      color: #848484;
+    }
+  }
+
+  .project-rate {
+    display: inline-block !important;
+    font-size: 1.2em;
+    margin-left: 20px;
+    color: dimgrey;
+  }
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 90%;
+    color: #AFAFAF;
+    opacity: 0.6;
+    font-size: 3px;
+    border-top: solid 1px #AFAFAF;
+  }
+
+  @media (max-width: 576px) {
+    hr {
+      width: 80%;
+    }
+    #project-rate-container {
+      font-size: 5.3vh !important;
+    }
+    .click-rate {
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      i {
+        font-size: 4.5vh;
+      }
+      .button-description {
+        font-size: 2vh;
+      }
+    }
+  }
+
+  #settings {
+    margin-left: 10px;
+  }
+}
+
+.ui.info.message {
+  margin-top: -45px;
+}
+
+#project-posts {
+  .post-title-container {
+    margin-bottom: 4em;
+    margin-top: 2em;
+    .post-title {
+      color: $primary-color;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  .add-post-reply {
+    margin-left: 3em;
+    @media(max-width: 768px) {
+      margin-left: 0em;
+    }
+    margin-top: 0.5em;
+    font-size: 0.7em;
+    .comment-button {
+      background-color: $primary-color;
+      color: $background-primary-color;
+      font-weight: normal;
+      border: 2px solid $primary-color;
+      font-size: 1em;
+      padding: 0.678em 1em;
+    }
+    .comment-button:hover {
+      background-color: $background-primary-color;
+      color: $primary-color;
+    }
+    .remove-border {
+      border-bottom: none !important;
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .input-size {
+      width: 100%;
+    }
+  }
+  #add-new-project-post-container {
+    width: 50%;
+    padding-left: 0.5em;
+    #add-new-post-text {
+      font-family: $font-type-body;
+    }
+  }
+  #no-project-posts {
+    color: $primary-color;
+    font-family: $font-type-body;
+    font-size: 1em;
+    align-content: center;
+    margin-top: -1em;
+    margin-bottom: 4em;
+  }
+  .project-posts-container {
+    margin-bottom: 3em;
+    width: 50%;
+    .description {
+      @media(max-width: 768px) {
+        font-size: 0.7em;
+      }
+    }
+    .post-right-content {
+      margin-top: 0.6em;
+      @media(max-width: 768px) {
+        display: none;
+      }
+    }
+    .mobile-div {
+      @media(min-width: 768px) {
+        display: none;
+      }
+    }
+    .computer-div {
+      @media(max-width: 768px) {
+        display: none;
+      }
+    }
+    .no-left-and-right-padding {
+      padding-left: 0em;
+      padding-right: 0em;
+    }
+    .rating-div {
+      padding-right: 0;
+      padding-top: 0.7em;
+    }
+    .number-of-votes-div {
+      color: rgba(34, 36, 38, .15);
+      padding-left: 0;
+      padding-right: 0;
+      font-size: 0.7em;
+      text-align: center;
+    }
+    .project-post-content {
+      font-family: $font-type-body;
+      margin-left: 3em;
+      padding-bottom: 1.3em;
+      border-bottom: 1px solid #d4cdd4;
+      @media(max-width: 768px) {
+        margin-left: 0em;
+      }
+    }
+    .post-content-user {
+      font-size: 0.8em;
+    }
+    .post-replies-container {
+      .reply-content {
+        font-family: $font-type-body;
+        font-size: 0.9em;
+      }
+      .reply-content-user {
+        font-size: 0.8em;
+      }
+      margin-left: 3em;
+      @media(max-width: 768px) {
+        margin-left: 0em;
+      }
+    }
+  }
+  .ui.centered.grid.load-more-posts {
+    margin-bottom: 3em;
+  }
+}
+
+#new-project-post {
+  width: 50%;
+  margin-top: -1em;
+  margin-bottom: 3em;
+  label {
+    color: $primary-color;
+    font-weight: bolder;
+    font-size: 1em;
+  }
+  .ui.button {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+  }
+  .ui.button:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+}
+
+#settings-modal {
+  .header {
+    color: $primary-color;
+    font-size: 1.5em;
+    font-weight: bold;
+    @media(max-width: 768px) {
+      text-align: center;
+      padding-right: 14px !important;
+    }
+  }
+  .no-border {
+    border-bottom: none;
+  }
+  .modal-letter {
+    font-family: $font-type-body;
+    color: $primary-color;
+    font-size: 1.2em;
+    @media(min-width: 768px) {
+      margin-left: 2em;
+    }
+  }
+  .project-post-title {
+    @media(max-width: 768px) {
+      text-align: center;
+    }
+    @media(min-width: 768px) {
+      width: 100%;
+    }
+  }
+  .project-post-content {
+    @media(max-width: 768px) {
+      text-align: center;
+    }
+    @media(min-width: 768px) {
+      width: 100%;
+    }
+  }
+  .edit-project-post {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+    @media(min-width: 768px) {
+      margin-left: 2.5em;
+    }
+  }
+  .edit-project-post:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+  .delete-project-post {
+    font-weight: normal;
+    font-size: 1em;
+    padding: 12px 40px;
+  }
+}
+
+#investors {
+  top: 20vh !important;
+  .content {
+    padding: 40px !important;
+    overflow-y: scroll;
+    max-height: 50vh;
+    
+    .centered {
+      text-align: center;
+    }
+    .button{
+      margin: 20px;
+    }
+
+    .investor {
+      padding-top: 15px !important;
+      padding-bottom: 15px !important;
+
+      img {
+        max-width: 78% !important;
+      }
+
+      .date {
+        font-style: italic;
+        padding-top: 5px;
+        font-size: 0.8em;
+      }
+
+    }
+  }
+}
+
+#reply-settings-modal {
+  .header {
+    color: $primary-color;
+    font-size: 1.5em;
+    font-weight: bold;
+    @media(max-width: 768px) {
+      text-align: center;
+      padding-right: 14px !important;
+    }
+  }
+  .no-border {
+    border-bottom: none;
+  }
+  .modal-letter {
+    font-family: $font-type-body;
+    color: $primary-color;
+    font-size: 1.2em;
+    @media(min-width: 768px) {
+      margin-left: 2em;
+    }
+  }
+  .project-reply-post-content {
+    @media(max-width: 768px) {
+      text-align: center;
+    }
+    @media(min-width: 768px) {
+      width: 100%;
+    }
+  }
+  .edit-reply-post {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+    @media(min-width: 768px) {
+      margin-left: 2.5em;
+    }
+  }
+  .edit-reply-post:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+  .delete-reply-post {
+    font-weight: normal;
+    font-size: 1em;
+    padding: 12px 40px;
+  }
+}

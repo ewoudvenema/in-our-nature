@@ -1,0 +1,560 @@
+<div id="show-user-page">
+
+    <!-- reject community user invitation modal start -->
+    <div class="ui modal" id="community-invitation-modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Reject invitation to community
+        </div>
+        <div class="content">
+            Are you sure you want to reject the invitation to join this community?
+            <br> You will have to be invited again if you want to join in the future!
+        </div>
+        <div class="actions">
+            <div class="ui button" id="invitation-modal-cancel">Cancel</div>
+            <div class="ui button reject-invitation-confirm" id="invitation-modal-ok">OK</div>
+        </div>
+    </div>
+    <input type="hidden" id="user-id" value=<%=@ user.id %> >
+    <!-- reject community invitation modal end -->
+
+    <div id="cover">
+        <div class="cover-image">
+            <%= if @user.picture_path != nil do %>
+                <img class="ui circular small centered image" src="<%=@user.picture_path%>">
+            <% else %>
+                <img class="ui circular small centered image" src="/images/default-user.png">
+            <% end %>
+        </div>
+    </div>
+    <div class="eight wide ui centered grid short-info">
+        <div class="row username">
+            <%= @user.name %>
+        </div>
+        <div class="row info">
+            <%= @user.description %>
+        </div>
+    </div>
+    <div id="show-user-info" class="container ui grid">
+        <!-- Desktop Menu -->
+        <div class="filter five wide column computer only">
+            <h4 class="ui dividing header general-information selected-header">
+                <%=String.upcase("General Information")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header change-password">
+                <%=String.upcase("Change Password")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header my-projects">
+                <%=String.upcase("My Projects")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header my-communities">
+                <%=String.upcase("My Communities")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header followed-communities">
+                <%=String.upcase("Followed Communities")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header community-invitations">
+                <%=String.upcase("community invitations")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header change-photo">
+                <%=String.upcase("Change photo")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header manage-communities" onclick='window.location.href="/manage"'>
+                <%=String.upcase("Manage Communities")%>
+                    <i class="angle right icon"></i>
+            </h4>
+            <h4 class="ui dividing header delete-account">
+                <%=String.upcase("Delete Account")%>
+                    <i class="angle right icon"></i>
+            </h4>
+        </div>
+
+        <!-- Mobile and Tablet Menu -->
+        <div class="profile-menu ui vertical menu mobile tablet only grid">
+            <a class="item general-information-mobile selected-header">
+                <i class="angle down icon"></i> General Information
+            </a>
+            <div class="ui form">
+            <%= form_for @changeset, @action, [class: "general-info-form-mobile", hidden: true], fn f -> %>
+            <%= if @changeset.action do %>
+                <div class="alert alert-danger">
+                    <p>Oops, something went wrong! Please check the errors below.</p>
+                </div>
+            <% end %>
+            <div class="row">
+                <div class="centered column form-group field">
+                    <div class="form-group">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "E-mail") %>
+                        </label>
+                        <input type="text" value="<%= @user.email %>" name="user[email]" class="form-control">
+                        <%= error_tag f, :email %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="centered column form-group field">
+                    <div class="form-group">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "description") %>
+                        </label>
+                        <input type="text" value="<%= @user.description %>" name="user[description]" class="form-control">
+                        <%= error_tag f, :description %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="centered column form-group field">
+                    <div class="form-group">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "name") %>
+                        </label>
+                        <input type="text" value="<%= @user.name %>" name="user[name]" class="form-control">
+                        <%= error_tag f, :name %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="centered column form-group field">
+                    <div class="form-group">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "date of birth") %>
+                        </label>
+                        <input type="date" value="<%= @user.date_of_birth %>" name="user[date_of_birth]" class="form-control">
+                        <%= error_tag f, :date_of_birth %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column form-group field submit-field">
+                    <button class="ui button" type="submit">
+                        <%=String.upcase("Submit")%>
+                    </button>
+                </div>
+            </div>
+            <% end %>
+            </div>
+
+            <a class="item change-password-mobile">
+                <i class="angle down icon"></i>Change Password
+            </a>
+
+            <div class="ui form">
+                <%= form_for @changeset, @action_password ,[class: "change-password-form-mobile", hidden: true], fn f -> %>
+                <%= if @changeset.action do %>
+                    <div class="alert alert-danger">
+                        <p>Oops, something went wrong! Please check the errors below.</p>
+                    </div>
+                <% end %>
+
+                <div class="row">
+                    <div class="centered column form-group field">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "Your Password") %>
+                        </label>
+                        <input type="password" name="user[current_password]" class="form-control">
+                        <%= error_tag f, :password %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="centered column form-group field">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "New password") %>
+                        </label>
+                        <input type="password" name="user[password]" class="form-control">
+                        <%= error_tag f, :password %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="centered column form-group field">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "Confirm Password") %>
+                        </label>
+                        <input type="password" name="user[password_confirmation]" class="form-control">
+                        <%= error_tag f, :password %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column form-group field password-submit-field">
+                        <button class="ui positive button">
+                            <%=String.upcase("Change Password")%>
+                        </button>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+
+            <a class="item change-photo-mobile">
+                <i class="angle down icon"></i>Change Photo
+            </a>
+
+            <div class="ui form">
+                <%= form_for @changeset, @action_image ,[class: "change-photo-form-mobile", hidden: true,multipart: true ], fn f -> %>
+                <%= if @changeset.action do %>
+                    <div class="alert alert-danger">
+                        <p>Oops, something went wrong! Please check the errors below.</p>
+                    </div>
+                <% end %>
+                <div class="row">
+                    <div class="centered column form-group field">
+                        <label class="control-label">
+                            <%= String.upcase(gettext "Your photo") %>
+                        </label>
+                        <input type="file" class="form-control" name="user[picture_path]">
+                        <%= error_tag f, :picture_path %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column form-group field password-submit-field">
+                        <button class="ui positive button">
+                            <%=String.upcase("Change Photo")%>
+                        </button>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+            <a class="item followed-communities-mobile">
+                <i class="angle down icon"></i>Followed Communities
+            </a>
+            <div class="followed-communities-row-mobile tohide ui grid">
+                <%= for community_followed <- get_followed_communities(@user.id) do %>
+                    <div class="row ui middle aligned">
+                        <%# <div class="two wide tablet two wide computer four wide mobile column">
+                            <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        </div> %>
+                        <div class="ui middle aligned ten wide column">
+                            <a href="<%=community_path(@conn, :show, community_followed.community_id) %>">
+                                <%= community_followed.name %>
+                            </a>
+                            <div class="following-date">Followed
+                                <%= elem(Timex.shift(community_followed.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                            </div>
+                        </div>
+                        <div class="ui middle aligned six wide column delete-button">
+                            <button value="<%= community_followed.community_id %>" class="follow-button ui button">Unfollow</button>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+
+            <!-- Community invitations mobile start -->
+            <a class="item" id="community-invitations-mobile">
+                <i class="angle down icon"></i>Community Invitations
+            </a>
+            <div id="community-invitations-row-mobile" class="tohide ui grid">
+                <%= for community_invitation <- get_community_invitations(@user.id) do %>
+                    <div class="row ui middle aligned">
+                        <div class="ui middle aligned ten wide column">
+                            <a href="<%=community_path(@conn, :show, community_invitation.community_id) %>">
+                                <%=community_invitation.community_name%>
+                            </a>
+                        </div>
+                        <div class="ui middle aligned three wide column">
+                            <div value="<%= community_invitation.community_id %>" class="ui button accept-invite-button">Join</div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                <% end %>
+            </div>
+            <!-- Community invitations mobile end -->
+
+            <a class="item my-projects-mobile">
+                <i class="angle down icon"></i>My Projects
+            </a>
+
+            <div class="my-projects-row-mobile tohide ui grid">
+                <%= for project <- get_projects_by_user_id(@user.id) do %>
+                    <%= if project.deleted != true do %>
+                        <div class="row ui middle aligned">
+                            <div class="ui middle aligned fourteen wide tablet fourteen wide computer twelve wide mobile column">
+                                <a href="<%=project_path(@conn, :show, project.id) %>">
+                                    <%= project.vision_name %>
+                                </a>
+                                <div class="following-date">Created
+                                    <%= elem(Timex.shift(project.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+            <a class="item menu-mobile my-communities-mobile">
+                <i class="angle down icon"></i>My Communities
+            </a>
+            <div class="my-communities-row-mobile tohide ui grid">
+                <%= for community <- get_communities_by_user_id(@user.id) do %>
+                    <div class="row ui middle aligned">
+                        <div class="ui middle aligned fourteen wide tablet fourteen wide computer twelve wide mobile column">
+                            <a href="<%=community_path(@conn, :show, community.id) %>">
+                                <%= community.name %>
+                            </a>
+                            <div class="following-date">Created
+                                <%= elem(Timex.shift(community.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+
+        </div> <!-- Mobile end -->
+
+        <!-- Computer only -->
+        <div class="information ten wide computer only right floated column centered ui form">
+        <%= form_for @changeset, @action, [class: "general-info-form", hidden: false], fn f -> %>
+        <%= if @changeset.action do %>
+            <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+        <% end %>
+        <div class="row">
+            <div class="centered column form-group field">
+                <div class="form-group">
+                    <label class="control-label">
+                        <%= String.upcase(gettext "E-mail") %>
+                    </label>
+                    <input type="text" value="<%= @user.email %>" name="user[email]" class="form-control email">
+                    <%= error_tag f, :email %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="centered column form-group field">
+                <div class="form-group">
+                    <label class="control-label">
+                        <%= String.upcase(gettext "description") %>
+                    </label>
+                    <input type="text" value="<%= @user.description %>" name="user[description]" class="form-control user-description">
+                    <%= error_tag f, :description %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="centered column form-group field">
+                <div class="form-group">
+                    <label class="control-label">
+                        <%= String.upcase(gettext "name") %>
+                    </label>
+                    <input type="text" value="<%= @user.name %>" name="user[name]" class="form-control name">
+                    <%= error_tag f, :name %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="centered column form-group field">
+                <div class="form-group">
+                    <label class="control-label">
+                        <%= String.upcase(gettext "date of birth") %>
+                    </label>
+                    <input type="date" value="<%= @user.date_of_birth %>" name="user[date_of_birth]" class="form-control date_birth">
+                    <%= error_tag f, :date_of_birth %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column form-group field submit-field">
+                <button class="ui button" type="submit">
+                    <%=String.upcase("Submit")%>
+                </button>
+            </div>
+        </div>
+        <% end %>
+
+        <%= form_for @changeset, @action_password ,[class: "change-password-form", hidden: true ], fn f -> %>
+        <%= if @changeset.action do %>
+            <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+        <% end %>
+        <div class="row">
+            <div class="centered column form-group field">
+                <label class="control-label">
+                    <%= String.upcase(gettext "Your Password") %>
+                </label>
+                <input id="your-password-id" type="password" name="user[current_password]" class="form-control your-password">
+                <%= error_tag f, :password %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="centered column form-group field">
+                <label class="control-label">
+                    <%= String.upcase(gettext "New password") %>
+                </label>
+                <input id="new-password-id" type="password" name="user[password]" class="form-control new-password">
+                <%= error_tag f, :password %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="centered column form-group field">
+                <label class="control-label">
+                    <%= String.upcase(gettext "Confirm Password") %>
+                </label>
+                <input id="confirm-password-id" type="password" name="user[password_confirmation]" class="form-control confirm-password">
+                <%= error_tag f, :password %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column form-group field password-submit-field">
+                <button id="submit-change-password" class="ui positive button">
+                    <%=String.upcase("Change Password")%>
+                </button>
+            </div>
+        </div>
+        <% end %>
+        <div class="my-projects-row tohide ui grid">
+            <%= for project <- get_projects_by_user_id(@user.id) do %>
+                <div class="row ui middle aligned">
+                    <div class="cover-image-new two wide column">
+                        <%= if (photo = List.first(get_project_photos(project.id)))!= nil do %>
+                            <img class="ui centered circular small image" src="<%=photo%>">
+                            <% else %>
+                             <img class="ui centered circular small image" src="/images/default-project-image.png">
+                            <% end %>
+                    </div>
+                    <div class="ui middle aligned eleven wide column">
+                        <a href="<%=project_path(@conn, :show, project.id) %>">
+                            <%= project.vision_name %>
+                        </a>
+                        <div class="following-date">Created
+                            <%= elem(Timex.shift(project.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                        </div>
+                    </div>
+                    <%# <div class="ui middle aligned three wide column delete-button">
+                        <button class="negative ui button">Cancel</button>
+                    </div> %>
+                </div>
+                <div class="ui divider"></div>
+            <% end %>
+        </div>
+        <div class="my-communities-row tohide ui grid">
+            <%= for community <- get_communities_by_user_id(@user.id) do %>
+                <div class="row ui middle aligned">
+                    <div class="cover-image-new two wide column">
+                    <%= if community.picture_path == "" do %>
+                        <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        <%else %>
+                         <img class="ui centered circular tiny image" src="<%= community.picture_path %>">
+                         <%end%>
+                    </div>
+                    <div class="ui middle aligned fourteen wide column">
+                        <a href="<%=community_path(@conn, :show, community.id) %>">
+                            <%= community.name %> 
+                        </a>
+                        <div class="following-date">Created
+                            <%= elem(Timex.shift(community.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            <% end %>
+        </div>
+        <div class="followed-communities-row tohide ui grid">
+            <%= for community_followed <- get_followed_communities(@user.id) do %>
+                <div class="row ui middle aligned">
+                    <div class="cover-image-new two wide tablet two wide computer four wide mobile column">
+                    <%= if community_followed.picture_path == "" do %>
+                        <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        <%else %>
+                         <img class="ui centered circular tiny image" src="<%= community_followed.picture_path %>">
+                         <%end%>
+                    </div>
+                    <div class="ui middle aligned eleven wide column">
+                        <a href="<%=community_path(@conn, :show, community_followed.community_id) %>">
+                            <%= get_community_name(community_followed.community_id) %>
+                        </a>
+                        <div class="following-date">Followed
+                            <%= elem(Timex.shift(community_followed.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                        </div>
+                    </div>
+                    <div class="ui middle aligned three wide column delete-button">
+                        <button value="<%= community_followed.community_id %>" class="follow-button ui button">Unfollow</button>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            <% end %>
+        </div>
+
+        <!-- Community invitations desktop start -->
+        <div class="community-invitations-row tohide ui grid">
+            <%= for community_invitation <- get_community_invitations(@user.id) do %>
+                <div class="row ui middle aligned">
+                    <div class="cover-image-new two wide tablet two wide computer four wide mobile column">
+                    <%= if get_community_photo(community_invitation.community_id) == "" do %>
+                        <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        <%else %>
+                         <img class="ui centered circular tiny image" src="<%= get_community_photo(community_invitation.community_id) %>">
+                         <%end%>
+                    </div>
+                    <div class="ui middle aligned eight wide column">
+                        <a href="<%=community_path(@conn, :show, community_invitation.community_id) %>">
+                            <%=community_invitation.community_name%>
+                        </a>
+                        <div class="invite-info">
+                            <div class="ui middle aligned four wide column">
+                                Invited by
+                                <%=community_invitation.inviter_name%>
+                            </div>
+                            <div class="invite-date">
+                                <%= elem(Timex.shift(community_invitation.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui middle aligned six wide column">
+                        <button value="<%= community_invitation.community_id %>" class="accept-invite-button ui button">Join</button>
+                        <button value="<%= community_invitation.community_id %>" class="reject-invite-button ui button">Reject</button>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+            <% end %>
+        </div>
+        <!-- Community invitations desktop end -->
+
+        <%= form_for @changeset, @action_image ,[class: "change-photo-form", hidden: true,multipart: true ], fn f -> %>
+        <%= if @changeset.action do %>
+            <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+            </div>
+        <% end %>
+        <div class="row">
+            <div class="centered column form-group field">
+                <label class="control-label">
+                    <%= String.upcase(gettext "Your photo") %>
+                </label>
+                <input type="file" class="form-control" name="user[picture_path]">
+                <%= error_tag f, :picture_path %>
+            </div>
+                </div>
+                <div class="row">
+                    <div class="column form-group field password-submit-field">
+                        <button class="ui positive button">
+                            <%=String.upcase("Change Photo")%>
+                        </button>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+  </div>
+  <div id = "delete-account-modal" class="ui small test modal">
+    <div class="header">
+      Delete Account
+    </div>
+    <div class="content">
+      <p>Are you sure you want to delete your account ? </p>
+    </div>
+    <div class="actions">
+      <div class="ui negative button">
+        No
+      </div>
+      <div class="ui positive right labeled icon button delete-account-button">
+        Yes
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>

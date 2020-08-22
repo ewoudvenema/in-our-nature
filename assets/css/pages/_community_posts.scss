@@ -1,0 +1,127 @@
+#community-posts-container {
+    .say-something {
+        padding: 2em;
+        background-color: #fbfef9;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60% !important;
+        @media(max-width: 768px) {
+            width: 100% !important;
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+        .div-user-image {
+            @media(max-width: 768px) {
+                width: 100%;
+            }
+            @media(max-width: 991px) {
+                width: 50%;
+            }
+        }
+    }
+
+    .div-input-field {
+        border-bottom: none;
+        width: 100%;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .input-field {
+        width: 100%;
+    }
+    .post-container {
+        padding: 2em;
+        background-color: #fbfef9;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60% !important;
+        @media(max-width: 991px) {
+            width: 100% !important;
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+        p {
+            font-size: 16px;
+        }
+        .post-header {
+            color: $primary-color;
+            font-weight: 500;
+            font-size: 21px;
+            margin-bottom: 12px;
+            @media(max-width: 991px) {
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+        .reply-header {
+            color: $primary-color;
+            font-weight: 500;
+            font-size: 21px;
+            padding-top: 0px;
+            @media(max-width: 991px) {
+                text-align: center;
+                font-size: 15px;
+            }
+        }
+        .post-reply-owner {
+            color: $primary-color;
+            font-weight: 500;
+            font-size: 21px;
+            @media(max-width: 991px) {
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+        .post-reply-text {
+            padding-right: 0px;
+        }
+        .post-reply {
+            margin-right: 0px;
+            padding-right: 0px;
+            margin-left: 0px;
+            padding-left: 0px;
+        }
+        .like {
+            i {
+                font-size: 25px;
+            }
+            i:hover {
+                font-size: 31px;
+            }
+        }
+        .options {
+            margin-top: 10px;
+            i {
+                font-size: 25px;
+            }
+            i:hover {
+                font-size: 31px;
+            }
+        }
+        .reply-post {
+            width: 87%;
+            @media(max-width: 991px) {
+                padding-left: 0px;
+            }
+        }
+        button {
+            margin-left: 15px;
+        }
+        .like-icon {
+            padding-left: 0px;
+        }
+        .reply-user-image {
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-top: 15px;
+        }
+    }
+}

@@ -1,0 +1,536 @@
+<div id="projectPage">
+    <div class="ui stackable container grid">
+        <div class="row doubling two column">
+            <div class="column center-vertically">
+              <div id="Glide" class="glide">
+
+  <div class="glide__arrows">
+    <button class="glide__arrow prev" data-glide-dir="<"><i class="chevron left icon"></i></button>
+    <button class=" glide__arrow next" data-glide-dir=">"><i class="chevron right icon"></i></button>
+  </div>
+
+                    <div class="glide__wrapper">
+                        <ul class="glide__track">
+                            <%= if Enum.count(@photos) == 0 do %>
+                            <li class="glide__slide">
+                                <div class="ui fluid image">
+                                    <img src="/images/default-project-image.png">
+                                </div>
+                            </li>
+                            <% end %>
+                            <%= for link <- @photos do %>
+                            <li class="glide__slide">
+                                <div class="ui fluid image">
+                                    <img src="<%= link %>">
+                                </div>
+                            </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <div class="glide__bullets"></div>
+                </div>
+            </div>
+
+            <div id="project-information" class="ui column equal width grid">
+                <div id="project-phases" class="row center aligned">
+                    <label id="project-current-state">
+                        <%= @project.state %>
+                    </label>
+                    <input type="hidden" id="project-id" value=<%=@ project.id %> >
+
+                    </label>
+                    <%= if String.equivalent?(@project.state,"presentation") do %>
+                    <div class="column selected">
+                        <div class="project-phase phase-presentation selected">
+                            <% else %>
+                            <div class="column">
+                                <div class="project-phase phase-presentation">
+                                    <% end %>
+                                    <i class="puzzle icon huge"></i>
+                                    <br/>
+                                    <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+                                    <div class="ui column radio checkbox center aligned" style="display: none;">
+                                        <input name="radio" type="radio" value="presentation" class="hidden">
+                                        <label>Presentation</label>
+                                    </div>
+                                    <%end%>
+                                    <span>Presentation</span>
+                                </div>
+                            </div>
+                            <%= if String.equivalent?(@project.state,"funding") do %>
+                            <div class="column selected">
+                                <div class="project-phase phase-funding selected">
+                                    <% else %>
+                                    <div class="column">
+                                        <div class="project-phase phase-funding">
+                                            <% end %>
+                                            <i class="shopping basket icon huge"></i>
+                                            <br/>
+                                            <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+                                            <div class="ui column radio checkbox center aligned" style="display: none;">
+                                                <input name="radio" type="radio" value="funding" class="hidden">
+                                                <label>Funding</label>
+                                            </div>
+                                            <%end%>
+                                            <span>Funding</span>
+                                        </div>
+                                    </div>
+                                    <%= if String.equivalent?(@project.state,"creation") do %>
+                                    <div class="column selected">
+                                        <div class="project-phase phase-creation selected">
+                                            <% else %>
+                                            <div class="column">
+                                                <div class="project-phase phase-creation">
+                                                    <% end %>
+                                                    <i class="paint brush icon huge"></i>
+                                                    <br/>
+                                                    <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+                                                    <div class="ui column radio checkbox center aligned"
+                                                         style="display: none;">
+                                                        <input name="radio" type="radio" value="creation"
+                                                               class="hidden">
+                                                        <label>Creation</label>
+                                                    </div>
+                                                    <%end%>
+                                                    <span>Creation</span>
+                                                </div>
+                                            </div>
+                                            <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+                                            <%= if Guardian.Plug.current_resource(@conn).id == @project.founder_id do %>
+                                            <div class="column one wide">
+                                                <i id="edit" class="icon link write large"></i>
+                                                <i id="save" class="icon link save large" style="display: none;"></i>
+                                            </div>
+                                            <% end %>
+                                            <% end %>
+                                        </div>
+                                        <div class="ui divider"></div>
+                                        <div class="row">
+                                            <div class="column twelve wide left floated">
+                                                <h1 class="project-title">
+                                                    <%= @project.vision_name %>
+                                                </h1>
+                                                <div id="karma" class="center-vertically project-rate">
+                                                <span>
+                                                    <%= @project.karma %>
+                                                </span>
+                                                    <i class="thumbs up outline icon"></i>
+                                                </div>
+                                            </div>
+                                            <div class="column four wide right floated">
+                                                <%= if Guardian.Plug.current_resource(@conn) != nil &&
+                                                @project.founder_id == Guardian.Plug.current_resource(@conn).id do %>
+                                                <div id="settings" class="ui icon dropdown button right floated">
+                                                    <i class="setting icon"></i>
+                                                    <div class="menu settings">
+                                                        <div id="editProjectBtn" class="item">
+                                                            <i class="write icon"></i>
+                                                            Edit Project
+                                                        </div>
+                                                        <div id="showCancelModalBtn" class="item">
+                                                            <i class="trash icon"></i>
+                                                            Cancel Project
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="row equal width project-params">
+                                            <div class="column">
+                                                <i title="Location" class="marker icon"></i>
+                                                <span> <%= @project.location%> </span>
+                                            </div>
+
+                                            <div class="column">
+                                                <i title="Reach" class="users icon"></i>
+                                                <%=String.capitalize(@project.impact)%>
+                                            </div>
+                                            <%= if @project.website != nil do %>
+                                            <div class="column">
+                                                <i title="Website" class="world icon">:</i>
+                                                <a href="<%= @project.website %>" target="_blank">Website</a>
+                                            </div>
+                                            <% end %>
+                                        </div>
+                                        <div class="row">
+                                            <div class="column">
+                                                <div id="user">
+                                                    <a class="fit-image"
+                                                       href="<%= getUserProfileLink(@project.founder_id) %>">
+                                                        <%= if getUserImage(@project.founder_id) != nil do %>
+                                                        <img class="ui circular tiny image"
+                                                             src="<%= getUserImage(@project.founder_id) %>">
+                                                        <% else %>
+                                                        <img class="ui circular tiny image"
+                                                             src="/images/default-user.png">
+                                                        <% end %>
+                                                    </a>
+                                                    <a id="username"
+                                                       href="<%= getUserProfileLink(@project.founder_id) %>">
+                                                        <%= getUsername(@project.founder_id) %>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="column click-rate right aligned">
+                                                <%= if @vote do %>
+                                                <%= if @vote.positive == true do %>
+                                                <a>
+                                                    <i id="upvote" class="thumbs up icon"></i>
+                                                    <span class="button-description">+1</span>
+                                                </a>
+                                                <a>
+                                                    <i id="downvote" class="thumbs outline down icon"></i>
+                                                    <span class="button-description">-1</span>
+                                                </a>
+                                                <% else %>
+                                                <a>
+                                                    <i id="upvote" class="thumbs outline up icon"></i>
+                                                    <span class="button-description">+1</span>
+                                                </a>
+                                                <a>
+                                                    <i id="downvote" class="thumbs down icon"></i>
+                                                    <span class="button-description">-1</span>
+                                                </a>
+                                                <% end %>
+                                                <% else %>
+                                                <a>
+                                                    <i id="upvote" class="thumbs outline up icon"></i>
+                                                    <span class="button-description">+1</span>
+                                                </a>
+                                                <a>
+                                                    <i id="downvote" class="thumbs outline down icon"></i>
+                                                    <span class="button-description">-1</span>
+                                                </a>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <% days = Timex.diff(@project.fund_limit_date, Timex.now, :days) %>
+                                        <%= if days >= 1 do %>
+                                        <div class="row date">
+                                            <div class="right floated aligned six wide column">
+                                                <span class="project-countdown">
+                                                <%=days%>
+                                                </span>
+                                                <%= if days > 1 do %>
+                                                <span class="project-days-to-go">days to go</span>
+                                                <% else %>
+                                                <%= if days == 1 do %>
+                                                <span class="project-days-to-go">day to go</span>
+                                                <% end %>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <% end %>
+                                        <div class="row funding-state">
+                                            <div class="column sixteen wide">
+                                                <% percentage_funded = (@project.current_fund / @project.fund_asked) * 100 %>
+                                                <div id="progress" class="ui progress blue <%= if percentage_funded > 100 do %> full-bar <% end %>"
+                                                     data-value="<%= percentage_funded %>" data-total="100">
+                                                    <div class="bar">
+                                                        <div class="progress"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column left aligned eight wide">
+                                                <span class="project-pledged">PLEDGED</span>
+                                                <br/>
+                                                <span id="project-pledged-value">
+                                                    <%= Decimal.round(Decimal.new(@project.current_fund), 0, :floor) |> Decimal.to_string %>
+                                                </span><span>$</span>
+                                            </div>
+                                            <div class="column right aligned eight wide">
+                                                <span class="project-goal">GOAL</span>
+                                                <br/>
+                                                <span id="project-goal-value">
+                                                    <%= Decimal.round(Decimal.new(@project.fund_asked), 0, :floor) |> Decimal.to_string %>
+                                                </span><span>$</span>
+                                            </div>
+                                        </div>
+                                        <div class="row center-children">
+                                            <%= if @is_owner do %>
+                                                <%= if @project.stripe_acc != nil do %>
+                                                    <span>
+                                                        <%= gettext "Your Stripe account is already connected" %>
+                                                    </span>
+                                                    <a id="disconnect-stripe-acc"> <%= gettext "Disconnect" %> </a>
+                                                <% else %>
+                                                    <a id="stripe-connect-btn" href="<%= @stripe_button_url %>"
+                                                        data-stripe-ajax-url="<%= @ajax_url %>"
+                                                        class="stripe-connect light-blue">
+                                                        <span> <%= gettext "Connect with Stripe" %> </span>
+                                                    </a>
+                                                <% end %>
+                                            <% else %>
+                                                <%= if @project.stripe_acc != nil do %>
+                                                    <div id="donate-form" class="ui action right labeled input">
+                                                        <label for="amount" class="ui label">$</label>
+                                                        <input placeholder="Amount" id="amount" type="text">
+                                                        <button id="donate-button" class="ui right labeled icon button">
+                                                            <i class="heart icon"></i>
+                                                            Donate
+                                                        </button>
+                                                    </div>
+                                                <% end %>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui two column centered stackable grid info-extra">
+                                <div id="project-info" class="five column centered row">
+                                    <div class="column aligned">
+                                        <button class="ui button blue-button active">What is the Vision?</button>
+                                    </div>
+                                    <div class="column aligned">
+                                        <button class="ui button blue-button">What is the Plan?</button>
+                                    </div>
+                                    <div class="column aligned">
+                                        <button class="ui button blue-button">Who will Benefit?</button>
+                                    </div>
+                                    <div class="column aligned">
+                                        <button id="show-investors" class="ui button blue-button show-investors">Backers</button>
+                                    </div>
+                                </div>
+                                <div class="four column centered project-info-text row">
+                                    <div class="row">
+                                        <%= @project.vision %>
+                                    </div>
+                                    <div class="row" style="display: none">
+                                        <%= @project.planning %>
+                                    </div>
+                                    <div class="row" style="display: none">
+                                        <%= @project.benefits %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project posts start -->
+        <div id="project-posts">
+            <div class="ui centered grid container post-title-container">
+      <span class="post-title">
+        Posts
+      </span>
+            </div>
+            <%= if Enum.count(@posts) == 0 do %>
+            <div class="ui centered grid">
+        <span id="no-project-posts">No Posts
+          <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+            <%= if @project.founder_id == Guardian.Plug.current_resource(@conn).id do %>
+              , maybe you want to
+              <a id="anchor-to-new-project-post" href="#new-project-post">
+                <span id="add-new-post-text">add one</span>
+              </a>
+            <% end %>
+          <% end %>!
+        </span>
+      </div>
+    <% else %>
+      <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+        <%= if @project.founder_id == Guardian.Plug.current_resource(@conn).id do %>
+          <div id="add-new-project-post-container" class="ui container">
+            <a id="anchor-to-new-project-post" href="#new-project-post">
+              <i class="add icon"></i>
+              <span id="add-new-post-text">New Post</span>
+            </a>
+          </div>
+        <% end %>
+      <% end %>
+        <div class="ui big relaxed divided list accordion container project-posts-container">
+          <%= for post <- @posts do %>
+            <div class="item title" post-id="<%= post.post_id %>">
+              <!-- post rating and option section computer, tablet and large screen only start -->
+              <div class="right floated content post-right-content">
+                <%= if Guardian.Plug.current_resource(@conn) != nil && post.user_id == Guardian.Plug.current_resource(@conn).id do %>
+                  <div class="ui three column grid">
+                    <div class="column post-options-modal" data-post-id="<%= post.post_id %>">
+                      <i class="setting icon"></i>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+              <!-- post rating and option section computer, tablet and large screen only end -->
+
+              <%= if post.user_photo == nil do %>
+                <img style="height: 35px; width:35px; object-fit: cover;" class="ui mini circular image" src="/images/default-user.png ">
+              <% else %>
+                <img style="height: 35px; width:35px; object-fit: cover;" class="ui mini circular image" src="<%= post.user_photo %>">
+              <% end %>
+
+              <div class="content left-info">
+                <a class="header">
+                  <%= post.title %>
+                </a>
+                <div class="description post-content-user">
+                  <a href="/user/<%= post.user_id %>">
+                    <%= post.user_name %>
+                  </a>
+                  created
+                  <%= elem(Timex.shift(post.date, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+                    |
+                  <a href="#input-reply-post-<%= post.post_id %>" class="anchor-to-new-reply">Reply</a>
+                </div>
+                <!-- post rating and option section mobile only start -->
+                <div class="ui grid mobile-div">
+                <%= if Guardian.Plug.current_resource(@conn) != nil && post.user_id == Guardian.Plug.current_resource(@conn).id do %>
+                  <div class="left floated fixe wide column post-options-modal" post-id="<%= post.post_id %>">
+                    <i class="setting icon"></i>
+                  </div>
+                <% end %>
+              </div>
+            <!-- post rating and option section mobile only end -->
+            </div>
+          </div>
+          <div class="content">
+          </div>
+        <% end %>
+      </div>
+      <%= if Enum.count(@posts) >= 10 do %>
+        <div class="ui centered grid container load-more-posts">
+          <h4><a>Load more posts</a></h4>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Project post listing end -->
+
+        <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+        <div id="new-project-post" class="ui form container">
+            <div class="required field">
+                <label>Post Title</label>
+                <input name="post-title" placeholder="Title" type="text" required>
+                <div id="post-title-required" class="ui pointing red basic label" style="display: none;">
+                    Please enter something
+                </div>
+            </div>
+            <div class="required field">
+                <label>Post Content</label>
+                <textarea name="post-content" placeholder="Giving me something..." rows="2" required></textarea>
+                <div id="post-content-required" class="ui pointing red basic label" style="display: none;">
+                    Please enter something
+                </div>
+            </div>
+            <input type="hidden" name="project-id" value="<%= @project.id %>">
+            <input type="hidden" name="user-id" value="<%= Guardian.Plug.current_resource(@conn).id %>">
+            <button id="submit-new-project-post" class="ui centered button" type="submit">Submit</button>
+        </div>
+        <% end %>
+    </div>
+
+
+    <div id="settings-modal" class="ui modal">
+        <div class="header">Settings</div>
+        <div class="content">
+            <div class="ui grid large screen computer tablet only">
+                <div class="four wide column middle aligned">
+                    <span class="modal-letter">Post Title:</span>
+                </div>
+                <div class="twelve wide column ui input no-border">
+                    <input type="text" class="project-post-title"/>
+                </div>
+                <div class="four wide column middle aligned">
+                    <span class="modal-letter">Post Content:</span>
+                </div>
+                <div class="twelve wide column ui input no-border">
+                    <input type="text" class="project-post-content"/>
+                </div>
+                <div class="four wide column">
+                    <button class="ui centered button edit-project-post" type="submit">Edit</button>
+                </div>
+                <div class="four wide column">
+                    <button class="negative ui button delete-project-post" type="submit">Delete Post</button>
+                </div>
+            </div>
+            <div class="ui centered grid mobile only">
+                <div class="row">
+                    <span class="modal-letter">Post Title</span>
+                </div>
+                <div class="row ui container input no-border">
+                    <input type="text" class="project-post-title"/>
+                </div>
+                <div class="row">
+                    <span class="modal-letter">Post Content</span>
+                </div>
+                <div class="row ui container input no-border">
+                    <input type="text" class="project-post-content"/>
+                </div>
+                <div class="sixteen wide column centered aligned">
+                    <button class="ui centered button edit-project-post" type="submit">Edit</button>
+                </div>
+                <div class="sixteen wide column centered aligned">
+                    <button class="negative ui button delete-project-post" type="submit">Delete Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cancel-modal" class="ui small test modal">
+        <div class="header">
+            Cancel Your Project
+        </div>
+        <div class="content">
+            <p>Are you sure you want to delete your project </p>
+        </div>
+        <div class="actions">
+            <div class="ui negative button">
+                No
+            </div>
+            <div class="ui positive right labeled icon button confirm-cancel-button">
+                Yes
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div id="investors" class="ui modal">
+        <div class="header">Backers</div>
+        <div class="content">
+            <div id="backers-list" class="ui grid">
+
+            </div>
+         </div>
+     </div>
+</div>
+
+<div id="reply-settings-modal" class="ui modal">
+  <div class="header">Reply Settings</div>
+  <div class="content">
+    <div class="ui grid large screen computer tablet only">
+      <div class="four wide column middle aligned">
+        <span class="modal-letter">Content:</span>
+      </div>
+      <div class="twelve wide column ui input no-border">
+        <input type="text" class="project-reply-post-content"></input>
+      </div>
+      <div class="four wide column">
+        <button class="ui centered button edit-reply-post" type="submit">Edit</button>
+      </div>
+      <div class="four wide column">
+        <button class="negative ui button delete-reply-post" type="submit">Delete</button>
+      </div>
+    </div>
+    <div class="ui centered grid mobile only">
+      <div class="row">
+        <span class="modal-letter">Content</span>
+      </div>
+      <div class="row ui container input no-border">
+        <input type="text" class="project-reply-post-content"></input>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="ui centered button edit-reply-post" type="submit">Edit</button>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="negative ui button delete-reply-post" type="submit">Delete Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://checkout.stripe.com/checkout.js"></script>

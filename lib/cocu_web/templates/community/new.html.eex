@@ -1,0 +1,7 @@
+<div id="header">
+<h2 class="title"><%= gettext "Create Community" %></h2>
+</div>
+
+<%= render "form.html", Map.put(assigns, :action, community_path(@conn, :create)) %>
+
+<!--<span><%= link "Back", to: community_path(@conn, :index) %></span>-->

@@ -1,0 +1,42 @@
+<div id="manage-page">
+    <div id="cover">
+        <div class="cover-image">
+            <%= if @user.picture_path != nil do %>
+                <img class="ui circular small centered image" src="<%=@user.picture_path%>">
+            <% else %>
+                <img class="ui circular small centered image" src="/images/default-user.png">
+            <% end %>
+        </div>
+    </div>
+    
+        <div class="eight wide ui centered grid short-info">
+            <div class="row username ui stackable grid">
+                <div class="name column">
+                <%= @user.name %>
+                </div>
+                <div class="back-profile column">
+                <a href="/user/<%=@user.id%>/edit" class="ui button">
+                Profile
+                </a>
+                </div>
+            </div>
+            <div class="row info">
+                <%= @user.description %>
+            </div>
+        </div>
+        <div class="computer only ui grid">
+            <div id="show-user-info" class="ui grid container">
+                <div class="filter four wide column computer only communities-user">
+                </div>
+                <div class="twelve wide column">
+                    <div class="ui grid container projects-community-row">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile project-communities-mobile tablet only ui centered grid"> 
+            <div class="ui vertical menu communities-user-mobile">
+            </div>
+        </div>
+    </div>
+</div>

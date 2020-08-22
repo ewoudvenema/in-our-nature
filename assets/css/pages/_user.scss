@@ -1,0 +1,130 @@
+#sign-up, #sign-up-mobile{
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  h2{
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Fredoka One', cursive;
+    margin-top: 5px;
+    .sign{
+      color: $primary-color;
+    }
+    .up{
+      color: $secondary-color;
+    }
+  }
+
+  p{
+    font-family: $font-type-body;
+    margin-bottom: 20px;
+  }
+
+  label{
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .input{
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-bottom: 0px;
+    display: block;
+    padding: 0px 20px;
+  }
+
+  input{
+    width: 100%;
+  }
+
+  .sign-up-button{
+    button{
+      font-family: $font-type-body;
+      font-size: 18px;
+      color: white;
+      background-color: $primary-color;
+      width: 80%;
+    }
+    margin-top: 30px;
+    margin-bottom: 25px;
+  }
+
+  .go-sign-in {
+    height: 70px;
+  }
+}
+
+#login, #login-mobile{
+  display: block;
+  text-align: center;
+  margin-top: 95px;
+  margin-bottom: 40px;
+  h2{
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Fredoka One', cursive;
+    margin-top: 5px;
+    .sign{
+      color: $secondary-color;
+    }
+    .in{
+      color: $primary-color;
+    }
+  }
+
+  p{
+    font-family: $font-type-body;
+  }
+
+  label{
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .input{
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-bottom: 0px;
+    display: block;
+    padding: 0px 20px;
+  }
+
+  input{
+    width: 100%;
+  }
+
+  .sign-in-button{
+    button{
+      font-family: $font-type-body;
+      font-size: 18px;
+      color: white;
+      background-color: $primary-color;
+      width: 80%;
+    }
+    @media (max-width: 768px){
+      button{
+        height: 6.5vh;
+      }
+    }
+    margin-top: 30px;
+    margin-bottom: 25px;
+  }
+
+  .go-sign-up {
+    height: 70px;
+  }
+
+}
+
+.cover-image {
+  img{
+    max-height: 150px;
+    max-width: 150px;
+    height: auto;
+    width: auto;
+  }
+}

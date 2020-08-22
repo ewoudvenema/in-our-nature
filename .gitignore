@@ -1,0 +1,50 @@
+# App artifacts
+_build/
+/db
+/deps
+/*.ez
+
+.env
+
+# Generated on crash by the VM
+erl_crash.dump
+
+# Static artifacts
+assets/node_modules
+assets/package-lock.json
+
+# Since we are building assets from web/static,
+# we ignore priv/static. You may want to comment
+# this depending on your deployment strategy.
+
+priv/static/*
+!/priv/static/fonts
+
+priv/static/js/*
+
+priv/static/images/*
+!/priv/static/images/semantic-ui
+
+# The config/prod.secret.exs file by default contains sensitive
+# data and you should not commit it into version control.
+#
+# Alternatively, you may comment the line below and commit the
+# secrets file as long as you replace its contents by environment
+# variables.
+
+config/prod.secret.exs
+config/dev.secret.exs
+config/test.secret.exs
+
+mix.lock
+
+**.lock
+
+.idea/*
+
+.DS_Store
+
+npm-debug\.log
+npm-debug.log.*
+
+config/owner\.secret\.exs

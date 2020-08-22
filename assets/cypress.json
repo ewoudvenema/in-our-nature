@@ -1,0 +1,15 @@
+{
+  "fixturesFolder": "../test/cypress/fixtures",
+  "integrationFolder": "../test/cypress/integration",
+  "pluginsFile": "../test/cypress/plugins",
+  "screenshotOnHeadlessFailure": false,
+  "screenshotsFolder": "../test/cypress/screenshots",
+  "supportFile": "../test/cypress/support",
+  "videoRecording": false,
+  "videoUploadOnPasses": false,
+  "videosFolder": "../test/cypress/videos",
+  "baseUrl": "http://localhost:4001",
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "projectId": "ckteq3"
+}

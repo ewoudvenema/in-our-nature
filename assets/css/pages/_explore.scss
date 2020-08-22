@@ -1,0 +1,226 @@
+#explore-page {
+  #cover {
+    height: 30vh;
+    background-color: $primary-color;
+    border-bottom: 2px solid white;
+    background: url("/images/universe_mask.jpg") no-repeat bottom center;
+    background-size: cover;
+  }
+
+  @media only screen and (max-width: 767px) {
+    #cover {
+      height: 15vh;
+    }
+  }
+
+  .bar {
+    max-width: 100%;
+  }
+
+  .filter-grid {
+    margin-top: 80px;
+    .filter {
+      color: $primary-color;
+    }
+
+    .filter-name {
+      padding-bottom: 8px;
+      padding-top: 15px;
+      font-size: 1.1em;
+    }
+    .ui.checkbox {
+      left: 25px;
+      display: block;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      font-size: 0.85em;
+
+      label {
+        cursor: pointer;
+      }
+    }
+    margin-bottom: 100px;
+    .filter-dropdown {
+      cursor: pointer;
+    }
+    label.checked, label.checked::after {
+      color: $secondary-color;
+      font-weight: bolder;
+    }
+    .ui.icon.input {
+      border: none;
+      padding: 0px;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  .projects-grid {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-left: 0px;
+  }
+  .ui.toggle.checkbox {
+    margin-bottom: 10px;
+  }
+
+  .project {
+    height: 55vh;
+    padding: 35px;
+    color: $primary-color;
+    cursor: pointer;
+
+    #progress {
+      margin-bottom: 5px;
+      margin-top: 30px;
+      .bar {
+        background-color: $primary-color;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        height: 15px;
+      }
+    }
+    .project-image {
+      padding-bottom: 10px;
+      height: 20vh;
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+      .ribbon {
+        font-size: 0.75em;
+        background-color: $primary-color;
+        color: rgba(255, 255, 255, 0.644);
+        font-weight: lighter;
+      }
+      .ui.ribbon.label {
+        background-color: $primary-color !important;
+        border-color: $tertiary-color !important;
+      }
+    }
+    .project-presentation {
+      text-align: right;
+      font-weight: bolder;
+      font-size: 1.1em;
+    }
+    .project-title {
+      padding-top: 10px;
+      font-size: 1.4em;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .project-phase {
+      text-align: right;
+      padding-top: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.13);
+      font-size: 0.8em !important;
+      color: $secondary-color;
+      font-weight: bolder;
+      i {
+        font-size: 1.3em;
+        margin-right: 1px !important;
+      }
+    }
+    .project-phase-description {
+      padding-top: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .project {
+      padding-left: 60px !important;
+      padding-right: 60px !important;
+      padding-top: 5px !important;
+      padding-bottom: 5px !important;
+    }
+  }
+
+  .project:hover {
+    background-color: rgba(199, 197, 197, 0.116);
+    border-radius: 5px;
+  }
+  .ui.grid.stackable.projects {
+    padding-bottom: 50px;
+  }
+  .filter-dropdown-categories, .filter-dropdown-communities {
+    cursor: pointer;
+  }
+
+  .ui.dropdown {
+    margin-right: 25px;
+    width: 20%;
+    color: $primary-color;
+  }
+
+  .filters-cover {
+    padding-top: 80px;
+    color: white;
+    font-weight: normal;
+    font-size: 1.1em;
+
+    .column {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+
+    .dropdown {
+      width: 8%;
+    }
+  }
+
+  .mobile-filter-grid {
+    padding-top: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: left;
+
+    .ui.checkbox {
+      display: block;
+      padding: 10px;
+
+      label {
+        cursor: pointer;
+      }
+    }
+
+    .filter {
+      padding-top: 20px;
+    }
+
+    .list-communities-mobile, .list-categories-mobile, .list-state-mobile, .list-impact-mobile {
+      padding-top: 13px;
+      display: none;
+      padding-bottom: 13px;
+    }
+
+    .ui.dividing.header {
+      color: $primary-color;
+      i {
+        text-align: right;
+        float: right;
+        font-size: 0.8em;
+        font-weight: lighter;
+      }
+    }
+
+    label.checked, label.checked::after {
+      color: $secondary-color;
+      font-weight: bolder;
+    }
+  }
+  .project-phase-description {
+    display: block;
+    height: 50px;
+    text-overflow: ellipsis;
+  }
+
+  .project-title {
+    display: block;
+    height: 38px;
+  }
+
+}

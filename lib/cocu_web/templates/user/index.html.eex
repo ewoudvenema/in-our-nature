@@ -1,0 +1,77 @@
+<div id="login" class="ui grid container computer only">
+  <h2>
+    <span class="sign">SIGN</span>
+    <span class="in">IN</span>
+  </h2>
+
+  <div class="five wide column centered">
+    <%= if @maybe_user == nil do %>
+    <%= form_for @changeset, @action, fn f -> %>
+
+    <div class="ui input">
+      <%= label f, :email, class: "control-label" %>
+      <%= text_input f, :email, class: "form-control" %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <div class="ui input">
+      <%= label f, :password, class: "control-label" %>
+      <%= password_input f, :password, class: "form-control" %>
+      <%= error_tag f, :password %>
+    </div>
+
+    <div class="sign-in-button">
+      <% var = String.upcase(gettext "Sign in")%>
+      <%= submit var, class: "ui button" %>
+    </div>
+  </div>
+
+  <% end %>
+  <% else %>
+  <h1>Hello <%= @maybe_user.name%>!</h1>
+  <span id="logout-link"><%= link "Logout", to: user_path(@conn, :logout), method: :post%></span>
+  <% end %>
+
+
+  <% var1 = gettext "New Here?"%>
+  <% var2 = gettext "Create a Cocu Account" %>
+  <div class="go-sign-up"><%= var1%> <%= link var2, to: user_path(@conn, :new) %></div>
+  <div class="fill-bottom"></div>
+</div>
+
+<div id="login-mobile" class="ui grid container mobile tablet only">
+  <h2>
+    <span class="sign">SIGN</span>
+    <span class="in">IN</span>
+  </h2>
+
+  <%= if @maybe_user == nil do %>
+  <%= form_for @changeset, @action, fn f -> %>
+
+  <div class="ui input">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="ui input">
+    <%= label f, :password, class: "control-label" %>
+    <%= password_input f, :password, class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="sign-in-button">
+    <% var = String.upcase(gettext "Sign in")%>
+    <%= submit var, class: "ui button" %>
+  </div>
+
+  <% end %>
+  <% else %>
+  <h1>Hello <%= @maybe_user.name%>!</h1>
+  <span id="logout-link"> <%= link "Logout", to: user_path(@conn, :logout), method: :post%></span>
+  <% end %>
+
+  <% var1 = gettext "New Here?"%>
+  <% var2 = gettext "Create a Cocu Account" %>
+  <div class="go-sign-up"><%= var1%> <%= link var2, to: user_path(@conn, :new) %></div>
+</div>

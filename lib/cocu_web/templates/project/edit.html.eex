@@ -1,0 +1,7 @@
+<div id="header">
+<i class="edit icon"></i>
+<h2 class="title"><%= String.upcase(gettext "Edit Project") %></h2>
+<div>
+
+<%= render "form.html", Map.put(assigns, :action, project_path(@conn, :update, @project)) %>
+

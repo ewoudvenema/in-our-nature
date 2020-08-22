@@ -1,0 +1,135 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: es_ES\n"
+
+#: web/templates/page/index.html.eex:2
+msgid "Welcome to Cocu"
+msgstr "Bienvenido a Cocu"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Explore"
+msgstr "Explorar"
+
+msgid "Sign In"
+msgstr "Registrarse"
+
+msgid "Sign Up"
+msgstr "Regístrate"
+
+msgid "My Profile"
+msgstr "Mi Perfil"
+
+msgid "Log Out"
+msgstr "Salir"
+
+msgid "Username"
+msgstr "Usuario"
+
+msgid "Email"
+msgstr "Correo Electrónico"
+
+msgid "date_of_birth"
+msgstr "Fecha de nacimiento"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Portuguese"
+msgstr "portugués"
+
+msgid "Dutch"
+msgstr "holandés"
+
+msgid "Search For Projects..."
+msgstr "Buscar proyectos..."
+
+msgid "Create Project"
+msgstr "Crear Proyecto"
+
+msgid "Create Community"
+msgstr "Crear Comunidad"
+
+msgid "A world where everyone can follow their passion and propose projects that make the world a more beautiful place."
+msgstr "Un mundo donde todos puedan seguir su pasión y proponer proyectos que hagan del mundo un lugar más hermoso."
+
+msgid "Edit Project"
+msgstr "editar proyecto"
+
+msgid "Vision Name"
+msgstr "¿Cuál es el nombre de tu visión"
+
+msgid "Project Plan"
+msgstr "¿Cual es tu plan? ¿Cómo logrará su visión"
+
+msgid "Vision behind it"
+msgstr "Qué quieres lograr"
+
+msgid "Social Impact"
+msgstr "¿Cuál será el impacto social de su visión? Quién se beneficiará"
+
+msgid "Fund Asked"
+msgstr "¿Cuánto financiamiento necesita tu visión?"
+
+msgid "Website"
+msgstr "website"
+
+msgid "Fund Limit Date"
+msgstr "¿Cuál es tu fecha límite?"
+
+msgid "Project Images"
+msgstr "Compartir algunas imágenes:"
+
+msgid "Submit"
+msgstr "enviar"
+
+msgid "Launch a Project"
+msgstr "Lanzar un proyecto"
+
+msgid "Nearing deadline"
+msgstr "Casi fecha límite"
+
+msgid "You may be interested in"
+msgstr "Usted puede estar interesado en"
+
+msgid "Our mission"
+msgstr "Nuestra misión"
+
+msgid "Sign in"
+msgstr "Entrar"
+
+msgid "New Here?"
+msgstr "¿Nuevo aquí?"
+
+msgid "Create a Cocu Account"
+msgstr "Crea una cuenta Cocu"
+
+msgid "Sign up"
+msgstr "Registro"
+
+msgid "Confirm Password"
+msgstr "Confirmar Password"
+
+msgid "Please enter your details below"
+msgstr "Por favor introduzca sus datos abajo"
+
+msgid "Your Communities"
+msgstr "Tus comunidades"
+
+msgid "Projects"
+msgstr "Proyectos"
+
+msgid "Communities"
+msgstr "Comunidades"

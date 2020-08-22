@@ -1,0 +1,30 @@
+<div id="community-page">
+  <div id="cover">
+  </div>
+  <div class="ui grid">
+    <div class="sixteen wide column search-community">
+      <div class="ui action input fourteen wide column">
+        <input type="text" id="searchCommunityName" placeholder="Search for communities...">
+        <button id="searchBtn" class="ui icon button">
+          <i class="search icon"></i>
+        </button>
+      </div>
+      <div class="two wide column right aligned computer only">
+        <select id="orderby" class="ui dropdown">
+          <option value="">Order by</option>
+          <option value="popularity">Popularity</option>
+          <option value="newest">Newest</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="ui grid container stackable community">
+    <div class="row" id="pagination"> 
+      <div class="ui pagination menu">
+        <a class="item prev-page">Previous Page</a>
+        <a class="item next-page">Next Page</a>
+      </div>
+    </div>
+  </div>
+</div>

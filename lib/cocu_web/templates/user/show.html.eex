@@ -1,0 +1,87 @@
+<div id="show-user-page">
+   <div id="cover">
+        <div class="cover-image">
+            <%= if @user.picture_path != nil do %>
+                <img class="ui circular small centered image" src="<%=@user.picture_path%>">
+            <% else %>
+                <img class="ui circular small centered image" src="/images/default-user.png">
+            <% end %>
+        </div>
+    </div>
+    <div class="eight wide ui centered grid short-info">
+        <div class="row username">
+            <%= @user.name %>
+        </div>
+        <div class="row email">
+            <%= @user.email %>
+        </div>
+        <div class="row info"><%= @user.description %></div>
+
+    </div>
+
+    <div id="show-user-page-info" class="show-user-info container ui grid">
+        <div class="ten wide tablet ten wide computer sixteen wide mobile column centered ui grid">
+            <h4 class="ui dividing header projects-information"> 
+                <%=String.upcase("projects")%>
+            </h4>
+             <%= for project <- get_projects_by_user_id(@user.id) do %>
+            <div class="row">
+                 <div class="cover-image-new two wide tablet two wide computer four wide mobile column">
+                        <%= if (photo = List.first(get_project_photos(project.id)))!= nil do %>
+                            <img class="ui centered circular tiny image" src="<%=photo%>">
+                            <% else %>
+                             <img class="ui centered circular tiny image" src="/images/default-project-image.png">
+                            <% end %>
+                    </div>
+                 <div class="ui middle aligned fourteen wide tablet fourteen wide computer twelve wide mobile column vision-name">
+                    <a href="<%=project_path(@conn, :show, project.id) %>"><%= project.vision_name %></a>
+                     <div class="following-date">Created by <%= Enum.at(String.split(@user.name, " "),0) %> <%= elem(Timex.shift(project.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %></div>
+                </div>
+            </div>
+            <% end %>
+             <h4 class="ui dividing header projects-information"> 
+                <%=String.upcase("communities")%>
+            </h4>
+             <%= for community <- get_communities_by_user_id(@user.id) do %>
+            <div class="row">
+                <div class="cover-image-new two wide tablet two wide computer four wide mobile column">
+                    <%= if community.picture_path == "" do %>
+                        <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        <%else %>
+                         <img class="ui centered circular tiny image" src="<%= community.picture_path %>">
+                         <%end%>
+                    </div>
+                <div class="ui middle aligned fourteen wide tablet fourteen wide computer twelve wide mobile column vision-name">
+                    <a href="<%=project_path(@conn, :show, community.id) %>"><%= community.name %></a>
+                    <div class="following-date">Created by <%= Enum.at(String.split(@user.name, " "),0) %> <%= elem(Timex.shift(community.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %></div>
+                </div>
+                 <%# <div class="ui middle aligned seven wide tablet seven wide computer five wide mobile column vision-name button-following">
+                       <button class="ui primary button">Follow</button>
+                </div> %>
+            </div>
+            <% end %>
+             <h4 class="ui dividing header projects-information"> 
+                <%=String.upcase("following communities")%>
+            </h4>
+             <%= for community_followed <- get_followed_communities(@user.id) do %>
+            <div class="row">
+                <div class="cover-image-new two wide tablet two wide computer four wide mobile column">
+                    <%= if community_followed.picture_path == "" do %>
+                        <img class="ui centered circular tiny image" src="/images/default.jpeg">
+                        <%else %>
+                         <img class="ui centered circular tiny image" src="<%= community_followed.picture_path %>">
+                         <%end%>
+                    </div>
+                <div class="ui middle aligned fourteen wide tablet fourteen wide computer twelve wide mobile column vision-name">
+                     <a href="<%=community_path(@conn, :show, community_followed.community_id) %>"><%= get_community_name(community_followed.community_id) %></a>
+                     <div class="following-date">Followed by <%= Enum.at(String.split(@user.name, " "),0) %> <%= elem(Timex.shift(community_followed.inserted_at, minutes: 0) |> Timex.format("{relative}", :relative), 1) %></div>
+                </div>
+                  <%# <div class="ui middle aligned seven wide tablet seven wide computer five wide mobile column vision-name button-following">
+                        <button class="ui primary button">Follow</button>
+                </div> %>
+            </div>
+            <% end %>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,390 @@
+// General website layout
+html{
+    width: 100vw;
+}
+
+body,h2{
+    font-family: $font-type-body;
+    background-color: white !important;
+}
+
+a{
+    cursor: pointer;
+}
+
+main{
+    margin-top: 13px;
+}
+
+.ui.message{
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    border-radius: 0;
+}
+
+
+.ui.info.message{
+    margin-top: 0 !important;
+}
+
+
+#header{
+    text-align: center;
+    padding-top: 40px;
+
+    .title{
+      font-size: 1.3em;
+      margin-top: 3px !important;
+      font-weight: bold;
+      color: $primary-color;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .puzzle, .edit {
+        font-size: 2em;
+        color: $primary-color;
+    }
+
+}
+
+.username-padding{
+    padding-left: 3px !important;
+}
+
+#nav-bar-header-mobile{
+    background-color: white;
+    padding: 20px;
+    margin: 0px;
+    display: block;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,.08);
+
+    #toggle {
+      width: 28px;
+      height: 30px;
+      float: right;
+      margin-right: 30px;
+    }
+    #toggle div {
+        width: 30px;
+        height: 5px;
+        background: $primary-color;
+        transition: all 0.3s;
+        margin: 4px auto;
+        backface-visibility: hidden;
+    }
+
+    #toggle.on .one {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    #toggle.on .two {
+      opacity: 0;
+    }
+
+    #toggle.on .three {
+      transform: rotate(-45deg) translate(7px, -8px);
+    }
+
+    .available-languages{
+        margin: auto;
+        display: none;
+        color: white;
+        border: 1px solid white;
+        width: 100%;
+        padding: 10px;
+        a{
+            width: 100%;
+            display: block;
+            font-size: 1rem;
+            padding: 5px;
+        }
+    }
+
+    #menu-mobile {
+      margin: auto;
+      display: none;
+      max-height: 80vh;
+      color: white;
+      border: 1px solid white;
+      width: 100%;
+      padding: 10px;
+      a{
+          width: 100%;
+          display: block;
+          font-size: 1rem;
+          padding: 5px;
+          color: $secondary-color;
+      }
+
+    .ui.accordion {
+        .item.title {
+            padding: 5px;
+            color: $secondary-color;
+            font-size: 1rem;
+        }
+    }
+
+
+    label.language-name{
+        cursor: pointer;
+    }
+    }
+
+
+    .mobile-user{
+    display: -webkit-inline-box;
+    }
+
+    .logo{
+        display: inline-block;
+        padding: 0;
+        padding-bottom: 10px;
+        margin-top: -5px;
+        font-size: 0;
+        font-family: 'Fredoka One', cursive;
+        span{
+            vertical-align: middle;
+        }
+
+        .cocu{
+            display: inline-block;
+            color: $secondary-color;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .cocu-o{
+            display: inline-block;
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 30px;
+
+        }
+        border-bottom: 1px;
+    }
+
+}
+
+#nav-bar-header{
+    box-shadow: 0 1.5px 4px rgba(65,92,105,.06);
+    background: white;
+    padding-top: 13px;
+
+    #explore-dropdown-menu{
+        color: $secondary-color;
+        cursor: pointer;
+        padding-left: 5px;
+        .menu{
+            border-radius: 3px;
+            overflow-y: hidden;
+            margin-top: 10px !important;
+        }
+        
+        .item:hover{
+            background-color: $background-primary-color;
+        }
+    }
+
+    i{
+        color: $secondary-color;
+        cursor: pointer;
+    }
+
+    .flag{
+        margin: 0 0 0 10px;
+    }
+
+    a{
+        color: $secondary-color;
+    }
+
+    .item{
+        padding: 13px;
+    }
+
+    #dropdown-icon-language{
+        cursor: pointer;
+    }
+
+    #active-language{
+        display: inline-block;
+    }
+
+
+    .last-column-language{
+        display: inline-block;
+        padding-right: 15px;
+    }
+
+    .available-languages{
+        position: fixed;
+        top: 50px;
+        right: 0px;
+        width: 200px;
+        background-color: white;
+        margin: auto;
+        display: none;
+        color: white;
+        border: 1px solid white;
+        padding: 10px;
+        a{
+            display: block;
+            font-size: 1rem;
+            padding: 10px 25px 10px;
+        }
+    }
+
+    label.language-name{
+        cursor: pointer;
+    }
+
+    #logo{
+        padding: 0 30px;
+        font-size: 0;
+        font-family: 'Fredoka One', cursive;
+        span{
+            vertical-align: middle;
+        }
+
+        .cocu{
+            color: $secondary-color;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .cocu-o{
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 30px;
+
+        }
+        border-bottom: 1px;
+    }
+
+    #search-bar{
+        display: inline-block;
+
+        .ui.icon.input{
+            border: none;
+            padding: 0;
+            .prompt{
+                border: none;
+               //border-bottom: 1px solid rgb(214, 212, 212);
+               // border-radius: 0;
+            }
+        }
+    }
+
+    #nav-user-info {
+        display: inline;
+        position: relative;
+
+        #nav-user-notification-count {
+            position: absolute;
+            color: $secondary-color;
+            top: -2.5em;
+            right: 0;
+            padding: 7px;
+            line-height: 5px;
+            font-size: 0.8em;
+        }
+    }
+    .language-name{
+         font-size: 12px;
+         font-style: italic;
+         color: grey;
+         cursor: pointer;
+    }
+    .menu{
+        text-align: right;
+        display: none;
+        width: 48%;
+        margin-top: 40px;
+        margin-right: 25px;
+        box-shadow: 0 0 3px 0 rgba(0,0,0,.08);
+        border-radius: .28571429rem .28571429rem 0 0;
+
+        a:hover{
+            background-color: $background-primary-color;
+        }
+
+        label{
+            cursor: pointer;
+        }
+     }
+
+    .ui.popup:before{
+        content: none;
+
+    }
+
+    #user-dropdown-menu{
+      margin-top: 20px;
+      border: none;
+      box-shadow: none;
+    }
+
+    .menu-border{
+      border-radius: 3px;
+    }
+}
+
+.footer{
+    background-color: $primary-color;
+    color: white;
+    padding: 10px;
+
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    .logo{
+        padding-bottom: 10px !important;
+        width: 13% !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+        /* For mobile phones: */
+        .logo{
+            width: 37.5% !important;
+        }
+    }
+
+    .row{
+        padding-bottom: 0px !important;
+        padding-top: 0px !important;
+    }
+
+    .subtitle{
+        font-weight: normal;
+        font-weight: lighter;
+        font-style: italic;
+        font-size: small;
+    }
+
+    .links{
+        padding-bottom: 15px !important;
+    }
+
+    .column-info{
+        width: 7% !important;
+    }
+
+    .icons{
+        font-size: 27px;
+        padding-top: 15px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .description{
+        font-weight: lighter;
+        font-style: italic;
+        font-size: small;
+    }
+
+    .separator{
+        width: 100%;
+        border-color: $separator-color;
+    }
+}

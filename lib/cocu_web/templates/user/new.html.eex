@@ -1,0 +1,25 @@
+<div id="sign-up" class="ui grid container computer only">
+  <div class="five wide column centered">
+    <h2>
+      <span class="sign">SIGN</span>
+      <span class="up">UP</span>
+    </h2>
+    <p> <%= gettext("Please enter your details below") %> </p>
+    <div class="sign-up-form">
+      <%= render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
+    </div>
+    <div class="go-sign-in">Already a Cocu member? Sign in<%= link " here", to: user_path(@conn, :index) %></div>
+  </div>
+</div>
+
+<div id="sign-up-mobile" class="ui grid container mobile tablet only">
+  <h2>
+    <span class="sign">SIGN</span>
+    <span class="up">UP</span>
+  </h2>
+  <p> Please enter your details below </p>
+  <div class="sign-up-form">
+    <%= render "form.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
+  </div>
+  <div class="go-sign-in">Already a Cocu member? Sign in<%= link " here", to: user_path(@conn, :index) %></div>
+</div>

@@ -1,0 +1,42 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="ui input">
+    <% name = gettext("Name") %>
+    <%= label f, name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control", required: true %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="ui input">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control", required: true, type: "email" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="ui input">
+    <%= label f, :password, class: "control-label", for: "password" %>
+    <%= text_input f, :password, class: "form-control", type: "password", id: "password", required: true %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="ui input">
+    <label for="confirmPassword">
+        <%= gettext ("Confirm Password") %>
+    </label>
+    <%= text_input f, :password_confirmation, class: "form-control", type: "password", id: "confirmPassword", required: true %>
+  </div>
+  <div class="ui input">
+    <%= file_input f, :picture_path, class: "control-label" %>
+    <%= error_tag f, :picture_path %>
+  </div>
+  <div class="sign-up-button">
+    <% var = String.upcase(gettext "Sign up") %>
+    <%= submit var, class: "ui button" %>
+  </div>
+
+<% end %>

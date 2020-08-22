@@ -1,0 +1,117 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: nl_NL\n"
+
+#: web/templates/page/index.html.eex:2
+msgid "Welcome to Cocu"
+msgstr "Welkom bij Cocu"
+
+msgid "About"
+msgstr "over"
+
+msgid "Sign In"
+msgstr "Aanmelden"
+
+msgid "Sign Up"
+msgstr "Aanmelden"
+
+msgid "My Profile"
+msgstr "Mijn Profiel"
+
+msgid "Log Out"
+msgstr "Vertrekken"
+
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Name"
+msgstr "naam"
+
+msgid "date_of_birth"
+msgstr "Geboortedatum"
+
+msgid "English"
+msgstr "Engels"
+
+msgid "Portuguese"
+msgstr "Portugees"
+
+msgid "Dutch"
+msgstr "Nederlands"
+
+msgid "Search For Projects..."
+msgstr "Zoek naar projecten..."
+
+msgid "Create Project"
+msgstr ""
+
+msgid "Create Community"
+msgstr ""
+
+msgid "Edit Project"
+msgstr ""
+
+msgid "Vision Name"
+msgstr "What is the name of your vision"
+
+msgid "Project Plan"
+msgstr "What is your plan? How will you accomplish your vision"
+
+msgid "Vision behind it"
+msgstr "What do you want to accomplish"
+
+msgid "Social Impact"
+msgstr "What will the social impact of your vision be? Who will benefit"
+
+msgid "Fund Asked"
+msgstr "How much funding does your vision need ?"
+
+msgid "Website"
+msgstr "website"
+
+msgid "Fund Limit Date"
+msgstr "What is your deadline ? "
+
+msgid "Project Images"
+msgstr "Deel enkele afbeeldingen:"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "A world where everyone can follow their passion and propose projects that make the world a more beautiful place."
+msgstr "Een wereld waar iedereen hun passie kan volgen en projecten voorstellen die de wereld een mooier plek maken."
+
+msgid "Launch a Project"
+msgstr "Start een project"
+
+msgid "Nearing deadline"
+msgstr "Bijna deadline"
+
+msgid "You may be interested in"
+msgstr "Mogelijk bent u geïnteresseerd in"
+
+msgid "Our mission"
+msgstr "Onze missie"
+
+msgid "Your Communities"
+msgstr "Jouw gemeenschappen"
+
+msgid "Explore"
+msgstr "Onderzoeken"
+
+msgid "Projects"
+msgstr "Projecten"
+
+msgid "Communities"
+msgstr "Gemeenschappen"

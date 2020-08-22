@@ -1,0 +1,100 @@
+image: edgarlpassos/ldso-build-image
+
+services:
+  - postgres:9.6
+
+stages:
+  - test
+  - deploy_dev
+  - deploy_prod
+
+variables:
+  GITLAB_DATABASE_PASSWORD: $DEV_BD_PASS
+
+before_script:
+  - mix deps.get
+  - npm install
+
+test-coverage:
+  variables:
+    MIX_ENV: "test"
+  stage: test
+  script:
+    - mix coveralls
+  only:
+    - develop
+    - master
+  environment:
+    name: test
+
+test-frontend:
+  variables:
+    MIX_ENV: "test"
+  script:
+    - MIX_ENV="test" mix phx.server &
+    - set -xe
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+    - apt-get update -yqqq
+    - apt-get install google-chrome-stable xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libxtst6 libasound2 -y
+    - apt-get install -y xvfb
+    - cd assets
+    - npm install
+    - $(npm bin)/cypress run --browser chrome --record --key 10c62a6c-9371-40a0-8270-3173634c2c9c
+  only:
+    - develop
+    - master
+  environment:
+    name: test
+
+
+codequality:
+  variables:
+    MIX_ENV: "test"
+  stage: test
+  script:
+    - mix credo --only warning
+  only:
+    - develop
+    - master
+  environment:
+    name: test
+
+deploy_dev:
+  variables:
+    MIX_ENV: "dev"
+  stage: deploy_dev
+  script:
+    - cd assets
+    - brunch build
+    - cd ..
+    - MIX_ENV=dev mix do compile, phoenix.digest, release --env=dev
+    - git checkout develop
+    - git pull
+    - git remote add server-dev https://heroku:$HEROKU_OWNER_API_KEY@git.heroku.com/cocu-development.git
+    - git push -f server-dev develop:master
+    - git remote remove server-dev
+  only:
+    - develop
+  environment:
+    name: development
+
+deploy_owner:
+  variables:
+    MIX_ENV: "prod"
+  stage: deploy_prod
+  script:
+    - cd assets
+    - brunch build --production
+    - cd ..
+    - MIX_ENV=prod mix do compile, phoenix.digest, release --env=prod
+    - git checkout master
+    - git pull
+    - git remote add server-po https://heroku:$HEROKU_OWNER_API_KEY@git.heroku.com/co-creative-universe.git
+    - git push -f server-po master
+    - git remote remove server-po
+  only:
+    - master
+  environment:
+    name: production
+

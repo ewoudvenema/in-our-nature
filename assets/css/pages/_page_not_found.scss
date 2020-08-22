@@ -1,0 +1,17 @@
+.page-not-found{
+h1{
+  font-family: 'Fredoka One', cursive;
+  .found{
+    color: $primary-color;
+    display: inline-block;
+    }
+  .page{
+    color: $primary-color;
+    display: inline-block;
+    }
+  .not{
+    color: $secondary-color;
+    display: inline-block;
+  }
+}
+}

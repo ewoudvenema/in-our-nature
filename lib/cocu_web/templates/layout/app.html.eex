@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/manifest.json">
+      <meta name="msapplication-TileColor" content="#ffffff">
+      <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+      <meta name="theme-color" content="#ffffff">
+
+    <%= if title = @conn.assigns[:page_title] do  %>
+    <title> <%= title %> </title>
+    <% else %>
+    <title> Cocu </title>
+    <% end %>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400,600,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:200,400" rel="stylesheet">
+
+
+  </head>
+
+  <body data-js-view-name="<%= js_view_name(@conn) %>">
+
+    <meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
+    <%= if Guardian.Plug.current_token(@conn) do %>
+      <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
+    <%end%>
+
+
+    
+     <%= render Elixir.CocuWeb.LayoutView, "header.html", assigns %>
+
+
+    <main role="test">
+        <%= if error = get_flash(@conn, :error) do %>
+          <div class="ui negative message" role="alert">
+        <% else %>
+          <div class="ui negative message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= error %>
+            </div>
+          </div>
+
+        <%= if warning = get_flash(@conn, :warning) do %>
+          <div class="ui warning message" role="alert">
+        <% else %>
+          <div class="ui warning message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= warning %>
+            </div>
+          </div>
+        <%= if info = get_flash(@conn, :info) do %>
+          <div class="ui info message" role="alert">
+        <% else %>
+          <div class="ui info message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= info %>
+            </div>
+          </div>
+
+        <%= if success = get_flash(@conn, :success) do %>
+          <div class="ui success message" role="alert">
+        <% else %>
+          <div class="ui success message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= success %>
+            </div>
+          </div>
+
+
+        <%= render @view_module, @view_template, assigns %>
+    </main>
+
+    <%= render Elixir.CocuWeb.LayoutView,  "footer.html", assigns %>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDqTj7FTAm7YF7I6bdBi26Co8SpZc6MEs&sensor=false&libraries=places"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </body>
+</html>

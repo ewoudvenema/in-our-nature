@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="ui grid sixteen wide column page-not-found centered middle aligned">
+    <div class="ui computer only four wide column centered middle aligned">
+      <h1>
+        <div class="page">PAGE </div>
+        <div class="not">NOT</div>
+        <div class="found">FOUND!</div>
+      </h1>
+    </div>
+    <div class="ui mobile tablet only sixteen wide column centered middle aligned">
+      <h1>
+        <div class="page">PAGE </div>
+        <div class="not">NOT</div>
+        <div class="found">FOUND!</div>
+      </h1>
+    </div>
+  </div>
+</div>

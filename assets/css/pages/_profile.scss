@@ -1,0 +1,195 @@
+#show-user-page-info{
+    padding-top: 20px;
+    padding-bottom: 85px;
+    a{
+        text-decoration: none;
+        color: $primary-color;
+    }
+    .vision-name, .projects-information{
+        text-align: left;    
+    }
+    h4{
+      cursor: auto;   
+    }
+
+    .button-following{
+        text-align: right;
+    }
+
+    .following-date{
+        padding-top: 5px;
+        font-size: 0.85em;
+    }
+
+}
+#show-user-page{
+    a{
+        text-decoration: none;
+        color: $primary-color;
+    }
+    .following-date{
+        padding-top: 5px;
+        font-size: 0.85em;
+    }
+    #cover{
+        height: 23vh;
+        background-color: $primary-color;
+        border-bottom: 2px solid white;
+        .cover-image{
+            width: 180px;
+            height: 180px;
+            margin: auto;
+            img{
+                top: 13vh; 
+                border: 2px solid white;
+                margin: auto; 
+                min-height: 100%;
+                min-width: 100%; 
+                object-fit: cover;
+             }
+        }
+    }
+    .selected-header{
+        font-weight: bolder !important;
+        color: $secondary-color !important;
+        i{
+            font-weight: bolder;
+        }
+    }
+    .ui.dividing.header{
+        font-size: 1.1em;
+        font-weight: normal;
+        color: $primary-color;
+        padding-bottom: 10px !important;
+        cursor: pointer;
+        
+        .icon{
+            font-size: 1.4em;
+        }
+    }
+    .short-info{
+        padding-top: 150px;
+        padding-bottom: 5px;
+        color: $primary-color;  
+        .row{
+            padding: 0;
+            padding-bottom: 18px;
+        }
+        .username{
+            font-size: 1.5em;
+            padding-bottom: 5;
+        }
+        .info{
+            text-align: center;
+            font-style: italic;
+        }
+    }
+    #show-user-info{
+        padding-top: 20px;
+        padding-bottom: 70px;
+        text-align: left;
+        .password-form{
+            padding-top: 15px;
+        }
+        .info{
+            text-align: center;
+        }
+        .row{
+            padding-bottom: 4px;
+            padding-top: 4px;
+        }
+        .ui.form .twelve.wide.field{
+            width: 100% !important;
+        }
+        label{
+            color: $primary-color;
+            font-weight: bolder;
+            font-size: 0.9em;
+          }
+          .ui.input{
+              border: none;
+              padding-left: 0;
+              width: 100%;
+          }
+          input,textarea,select{
+            background-color: $background-primary-color;
+          }
+          input:focus,textarea:focus{
+             border-color: $primary-color;
+          }
+        
+          .delete-button{
+            text-align: right;
+            margin-bottom: 0 !important;
+            }
+
+          .general-info-form{
+            .ui.button{
+                background-color: $primary-color;
+                color: $background-primary-color;
+                font-weight: normal;
+                border: 2px solid $primary-color;
+                font-size: 1em;
+                padding: 10px 40px;
+                margin-bottom: 30px;
+              }
+              .ui.button:hover{
+                background-color: $background-primary-color;
+                color: $primary-color;
+              }
+          }
+          .submit-field{
+              text-align: left;
+          }
+          .user-current-info{
+            color: rgba(128, 128, 128, 0.37);
+            padding-top: 15px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid;
+          }  
+    }
+    .profile-menu{
+        margin-left: 14px;
+        width: 100%;
+        margin-right: 14px;
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+    .my-projects-row, .my-projects-row-mobile, .my-communities-row, .my-communities-row-mobile, .followed-communities-row, .followed-communities-row-mobile, .tohide{
+        display: none;
+        padding-top: 0px;
+        margin: 0;
+    }
+    .change-photo-form-mobile, .my-projects-row-mobile, .followed-communities-row-mobile, 
+    .my-communities-row-mobile, .change-password-form-mobile, .general-info-form-mobile, 
+    #community-invitations-row-mobile{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .my-projects, .my-communities, .followed-communities, .change-photo{
+        margin-bottom: 0 !important;
+    }
+    .followed-communities-row-mobile, .my-projects-row-mobile, .my-communities-row-mobile{
+        .row{
+            padding-bottom: 20px !important;
+        }
+    }
+
+    .remove-invite{
+        color: $primary-color;
+        cursor: pointer;
+    }
+
+    .cover-image-new{
+        object-fit: cover;
+        width: 70px !important;
+        height: 70px;
+        padding: 0;
+        img{
+          height: 100%!important;
+          max-width: 100% !important;
+            object-fit: cover;
+         }
+    }
+}
+

@@ -1,0 +1,674 @@
+#community-container {
+  .setting{
+    height: 10px;
+    width: 10px;
+  }
+
+  .background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 100% !important;
+    opacity: 1 !important;
+    .community-name {
+      color: white;
+      font-size: 2.5em;
+    }
+    .community-description {
+      color: white;
+      font-size: 1.15em;
+      margin-top: 15px;
+      font-style: italic;
+      font-weight: 200;
+    }
+    .ui.button {
+      font-size: 1.15em;
+      font-weight: 500;
+      font-family: $font-type-body;
+    }
+    #community-user-section {
+      margin-top: 15px;
+    }
+    #community-user-options {
+      padding: 0 10px 0 10px;
+      text-align: left;
+      margin-top: 0;
+      a {
+        color: white;
+        .community-user-text {
+          margin-left: 5px;
+          &:hover {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+  #community-user-section-mobile {
+    margin-top: 0;
+    border-bottom: none;
+    text-align: center;
+    .community-user-text {
+      font-weight: normal;
+    }
+    tr:hover {
+      cursor: pointer;
+    }
+    #community-invite-user-accordion {
+      .title {
+        padding: 0;
+      }
+      .content.field {
+        padding: 1em;
+      }
+      .button {
+        margin-top: 10px;
+      }
+    }
+  }
+  #project-title-container {
+    margin-bottom: 4em;
+    margin-top: 4em;
+    .project-title {
+      color: $primary-color;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  .load-more-projects.container {
+    font-family: $font-type-body;
+    margin-bottom: 5em;
+  }
+  #project-list-container {
+    margin-bottom: 1.5em;
+    #no-projects {
+      color: $primary-color;
+      font-family: $font-type-body;
+      font-size: 1em;
+      margin: auto;
+      margin-top: -1em;
+    }
+    .project-div-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .image-card img {
+        -webkit-transition: 0.4s ease;
+        transition: 0.4s ease;
+      }
+      .zoom-effect-container {
+        padding-left: 0em;
+        padding-right: 0em;
+      }
+      .zoom-effect-container:hover .image-card img {
+        -webkit-transform: scale(1.08);
+        transform: scale(1.04);
+      }
+      .project-image {
+        margin-bottom: 1.5em;
+      }
+      .project-div-name {
+        padding-top: 0px;
+        .project-name {
+          width: 90%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $primary-color;
+          font-size: 1.3em;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .more-projects {
+    text-align: center;
+    font-size: 0.8em;
+    color: $primary-color;
+    margin-top: 2em;
+    margin-bottom: 4em;
+  }
+  #users-title-container {
+    margin-bottom: 4em;
+    margin-top: 4em;
+    .users-title {
+      color: $primary-color;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  #post-title-container {
+    margin-bottom: 4em;
+    margin-top: 2em;
+    .post-title {
+      color: $primary-color;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  #no-posts {
+    color: $primary-color;
+    font-family: $font-type-body;
+    font-size: 1em;
+    align-content: center;
+    margin-top: -1em;
+    margin-bottom: 4em;
+  }
+  #posts-container {
+    margin-bottom: 3em;
+    width: 50%;
+    .description {
+      @media(max-width: 768px) {
+        font-size: 0.7em;
+      }
+    }
+    .post-right-content {
+      margin-top: 0.6em;
+      @media(max-width: 768px) {
+        display: none;
+      }
+    }
+    .mobile-div {
+      @media(min-width: 768px) {
+        display: none;
+      }
+    }
+    .computer-div {
+      @media(max-width: 768px) {
+        display: none;
+      }
+    }
+    .no-left-and-right-padding {
+      padding-left: 0em;
+      padding-right: 0em;
+    }
+    .rating-div {
+      padding-right: 0;
+      padding-top: 0.7em;
+    }
+    .right-margin {
+      margin-right: 1em;
+    }
+    .number-of-votes-div {
+      color: rgba(34, 36, 38, .15);
+      padding-left: 0;
+      padding-right: 0;
+      font-size: 0.7em;
+      text-align: center;
+    }
+    .anchor-to-new-reply {
+      @media(max-width: 768px) {
+        margin-bottom: 1em;
+      }
+    }
+    .post-content {
+      font-family: $font-type-body;
+      margin-left: 3em;
+      padding-bottom: 1.3em;
+      border-bottom: 1px solid #d4cdd4;
+      @media(max-width: 768px) {
+        margin-left: 0em;
+      }
+    }
+    .post-content-user {
+      font-size: 0.8em;
+    }
+    .post-replies-container {
+      .reply-content {
+        font-family: $font-type-body;
+        font-size: 0.9em;
+      }
+      .reply-content-user {
+        font-size: 0.8em;
+      }
+      margin-left: 3em;
+      @media(max-width: 768px) {
+        margin-left: 0em;
+      }
+    }
+    .add-post-reply {
+      margin-left: 3em;
+      @media(max-width: 768px) {
+        margin-left: 0em;
+      }
+      margin-top: 0.5em;
+      font-size: 0.7em;
+      .comment-button {
+        background-color: $primary-color;
+        color: $background-primary-color;
+        font-weight: normal;
+        border: 2px solid $primary-color;
+        font-size: 1em;
+        padding: 0.678em 1em;
+      }
+      .comment-button:hover {
+        background-color: $background-primary-color;
+        color: $primary-color;
+      }
+      .remove-border {
+        border-bottom: none !important;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .input-size {
+        width: 100%;
+      }
+    }
+  }
+  #add-new-post-container {
+    width: 50%;
+    padding-left: 0.5em;
+    #add-new-post-text {
+      font-family: $font-type-body;
+    }
+  }
+  #new-post {
+    width: 50%;
+    margin-top: -1em;
+    margin-bottom: 3em;
+    label {
+      color: $primary-color;
+      font-weight: bolder;
+      font-size: 1em;
+    }
+    .ui.button {
+      background-color: $primary-color;
+      color: $background-primary-color;
+      font-weight: normal;
+      border: 2px solid $primary-color;
+      font-size: 1em;
+      padding: 10px 40px;
+    }
+    .ui.button:hover {
+      background-color: $background-primary-color;
+      color: $primary-color;
+    }
+  }
+  .ui.centered.grid.load-more-posts {
+    margin-bottom: 3em;
+  }
+}
+
+#create-community {
+  text-align: center;
+  border-radius: 2px;
+  margin-bottom: 100px;
+  text-align: left;
+  padding-left: 10px;
+  #founder-id-hidden {
+    display: none;
+  }
+  #community-privacy-options {
+    margin-left: 10px;
+  }
+  .ui.labeled.button .icon {
+    color: white;
+    background-color: $light-grey;
+    border-color: $light-grey;
+  }
+  .ui.labeled.button:hover .icon {
+    color: white;
+    background-color: $tertiary-color;
+    border-color: $tertiary-color;
+  }
+  .ui.labeled.button:active .icon {
+    color: white;
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+  .ui.labeled.button:focus .icon {
+    color: white;
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+  .alert.alert-danger {
+    font-style: italic;
+    color: #c0392b !important;
+    padding-bottom: 10px;
+    font-size: 1em;
+  }
+  .form {
+    padding-top: 50px;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .dropzone {
+    border: 1px solid $light-grey !important;
+    border-radius: 4px !important;
+  }
+  .ui.labeled.input {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #calendarInput {
+    border: none;
+  }
+  label {
+    color: $primary-color;
+    font-weight: bolder;
+    font-size: 0.85em;
+  }
+  .ui.label {
+    color: $primary-color;
+    font-weight: bold;
+  }
+  input,
+  textarea,
+  select {
+    background-color: $background-primary-color;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: $primary-color;
+  }
+  .ui.button {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+  }
+  .ui.button:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+  .ui.labeled.input {
+    border-bottom: none;
+  }
+  select {
+    margin-top: 14px;
+  }
+  .ui.segment {
+    box-shadow: none;
+    border: none;
+    background-color: $background-primary-color !important;
+  }
+}
+
+#community-page {
+  .search-community {
+    text-align: center;
+    .input {
+      border-color: white;
+      padding-top: 30px;
+      font-size: 1.2em;
+    }
+    input {
+      border: none;
+    }
+    button {
+      background: none;
+    }
+  }
+  #settings-modal {
+    .header {
+      color: $primary-color;
+      font-size: 1.5em;
+      font-weight: bold;
+      @media(max-width: 768px) {
+        text-align: center;
+        padding-right: 14px !important;
+      }
+    }
+    .no-border {
+      border-bottom: none;
+    }
+    .modal-letter {
+      font-family: $font-type-body;
+      color: $primary-color;
+      font-size: 1.2em;
+      @media(min-width: 768px) {
+        margin-left: 2em;
+      }
+    }
+    .project-post-title {
+      @media(max-width: 768px) {
+        text-align: center;
+      }
+      @media(min-width: 768px) {
+        width: 100%;
+      }
+    }
+    .project-post-content {
+      @media(max-width: 768px) {
+        text-align: center;
+      }
+      @media(min-width: 768px) {
+        width: 100%;
+      }
+    }
+    .edit-project-post {
+      background-color: $primary-color;
+      color: $background-primary-color;
+      font-weight: normal;
+      border: 2px solid $primary-color;
+      font-size: 1em;
+      padding: 10px 40px;
+      @media(min-width: 768px) {
+        margin-left: 2.5em;
+      }
+    }
+    .edit-project-post:hover {
+      background-color: $background-primary-color;
+      color: $primary-color;
+    }
+    .delete-project-post {
+      font-weight: normal;
+      font-size: 1em;
+      padding: 12px 40px;
+    }
+  }
+  #reply-settings-modal {
+    padding: 2em;
+    .header {
+      color: $primary-color;
+      font-size: 1.5em;
+      font-weight: bold;
+      @media(max-width: 768px) {
+        text-align: center;
+        padding-right: 14px !important;
+      }
+    }
+    .no-border {
+      border-bottom: none;
+    }
+    .modal-letter {
+      font-family: $font-type-body;
+      color: $primary-color;
+      font-size: 1.2em;
+      @media(min-width: 768px) {
+        margin-left: 2em;
+      }
+    }
+    .project-reply-post-content {
+      @media(max-width: 768px) {
+        text-align: center;
+      }
+      @media(min-width: 768px) {
+        width: 100%;
+      }
+    }
+    .edit-reply-post {
+      background-color: $primary-color;
+      color: $background-primary-color;
+      font-weight: normal;
+      border: 2px solid $primary-color;
+      font-size: 1em;
+      padding: 10px 40px;
+      @media(min-width: 768px) {
+        margin-left: 2.5em;
+      }
+    }
+    .edit-reply-post:hover {
+      background-color: $background-primary-color;
+      color: $primary-color;
+    }
+    .delete-reply-post {
+      font-weight: normal;
+      font-size: 1em;
+      padding: 12px 40px;
+    }
+  }
+  #cover {
+    height: 30vh;
+    background-color: $primary-color;
+    border-bottom: 2px solid white;
+    background: url("/images/universe_mask.jpg") no-repeat bottom center;
+    background-size: cover;
+  }
+  .community {
+    margin-bottom: 20px;
+  }
+  .unique-community:hover {
+    background-color: rgba(199, 197, 197, .2);
+    cursor: pointer;
+  }
+  .community-image {
+    padding-bottom: 10px;
+    img {
+      height: 100%;
+      min-height: 178px;
+      max-height: 182px;
+    }
+    .ribbon {
+      font-size: 1em;
+      background-color: $primary-color;
+      color: rgba(255, 255, 255, 0.644);
+      font-weight: lighter;
+    }
+    .ui.ribbon.label {
+      background-color: $primary-color !important;
+      border-color: $tertiary-color !important;
+    }
+  }
+  .community-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: $primary-color !important;
+  }
+  .community-description {
+    padding-top: 10px;
+    overflow: hidden;
+  }
+  .community-founder {
+    font-weight: bold;
+    padding-bottom: 0px;
+  }
+  .ui.grid.stackable.community {
+    margin-bottom: 5em;
+    .pagination {
+      margin-top: 2em;
+    }
+  }
+}
+
+#community-invite-user-modal,
+#community-invite-user-accordion {
+  .community-invite-status {
+    padding-top: 0;
+    display: none;
+    &.success {
+      color: $primary-color;
+    }
+    &.failure {
+      color: lightcoral;
+    }
+  }
+}
+
+#community-user-list-modal {
+  .meta {
+    display: none;
+  }
+  .user-list-remove-user:hover {
+    color: $secondary_color;
+    cursor: pointer;
+  }
+  height:80%;
+  .content {
+    height: 100%;
+  }
+  .loader-segment {
+    border: none;
+    background: inherit;
+    box-shadow: none;
+    display: none;
+  }
+
+  .item{
+    img{
+      height: 80px;
+      object-fit: cover;
+    }
+    .content{
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+}
+
+#community-remove-user-modal {
+  .meta {
+    display: none;
+  }
+}
+
+.input-field {
+  border-bottom: none;
+}
+
+#reply-settings-modal {
+  .header {
+    color: $primary-color;
+    font-size: 1.5em;
+    font-weight: bold;
+    @media(max-width: 768px) {
+      text-align: center;
+      padding-right: 14px !important;
+    }
+  }
+  .no-border {
+    border-bottom: none;
+  }
+  .modal-letter {
+    font-family: $font-type-body;
+    color: $primary-color;
+    font-size: 1.2em;
+    @media(min-width: 768px) {
+      margin-left: 2em;
+    }
+  }
+  .project-reply-post-content {
+    @media(max-width: 768px) {
+      text-align: center;
+    }
+    @media(min-width: 768px) {
+      width: 100%;
+    }
+  }
+  .edit-reply-post {
+    background-color: $primary-color;
+    color: $background-primary-color;
+    font-weight: normal;
+    border: 2px solid $primary-color;
+    font-size: 1em;
+    padding: 10px 40px;
+    @media(min-width: 768px) {
+      margin-left: 2.5em;
+    }
+  }
+  .edit-reply-post:hover {
+    background-color: $background-primary-color;
+    color: $primary-color;
+  }
+  .delete-reply-post {
+    font-weight: normal;
+    font-size: 1em;
+    padding: 12px 40px;
+  }
+}

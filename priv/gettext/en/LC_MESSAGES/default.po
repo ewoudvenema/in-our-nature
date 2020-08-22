@@ -1,0 +1,117 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en_EN\n"
+
+#: web/templates/page/index.html.eex:2
+msgid "Welcome to Cocu"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Explore"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Sign Up"
+msgstr ""
+
+msgid "My Profile"
+msgstr ""
+
+msgid "Log Out"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "date_of_birth"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Portuguese"
+msgstr ""
+
+msgid "Dutch"
+msgstr ""
+
+msgid "Search For Projects..."
+msgstr ""
+
+msgid "Create Project"
+msgstr ""
+
+msgid "Edit Project"
+msgstr ""
+
+msgid "Vision Name"
+msgstr "What is the name of your vision"
+
+msgid "Project Plan"
+msgstr "What is your plan? How will you accomplish your vision"
+
+msgid "Vision behind it"
+msgstr "What do you want to accomplish"
+
+msgid "Social Impact"
+msgstr "What will the social impact of your vision be? Who will benefit"
+
+msgid "Fund Asked"
+msgstr "How much funding does your vision need ?"
+
+msgid "Website"
+msgstr "website"
+
+msgid "Fund Limit Date"
+msgstr "What is your deadline ? "
+
+msgid "Project Images"
+msgstr "Share some images:"
+
+msgid "Submit"
+msgstr "submit"
+
+msgid "Sign in"
+msgstr "Sign in"
+
+msgid "New Here?"
+msgstr "New Here?"
+
+msgid "Create a Cocu Account"
+msgstr "Create a Cocu Account"
+
+msgid "Sign up"
+msgstr "Sign up"
+
+msgid "Confirm Password"
+msgstr "Confirm Password"
+
+msgid "Please enter your details below"
+msgstr "Please enter your details below"
+
+msgid "Your Communities"
+msgstr "Your Communities"
+
+msgid "Projects"
+msgstr "Projects"
+
+msgid "Communities"
+msgstr "Communities"

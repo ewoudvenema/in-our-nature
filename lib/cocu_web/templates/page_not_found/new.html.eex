@@ -1,0 +1,5 @@
+<h2>New Page not found</h2>
+
+<%= render "form.html", Map.put(assigns, :action, page_not_found_path(@conn, :create)) %>
+
+<span><%= link "Back", to: page_not_found_path(@conn, :index) %></span>

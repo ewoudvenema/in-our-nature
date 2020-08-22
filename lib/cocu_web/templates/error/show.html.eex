@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <%= if title = @conn.assigns[:page_title] do  %>
+    <title> <%= title %> </title>
+    <% else %>
+    <title> Cocu </title>
+    <% end %>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:200,400" rel="stylesheet">
+
+
+  </head>
+
+  <body data-js-view-name="Page_not_foundView">
+
+    <meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
+    <%= if Guardian.Plug.current_token(@conn) do %>
+      <meta name='guardian_token' content="<%= Guardian.Plug.current_token(@conn) %>">
+    <%end%>
+
+
+
+     <%= render Elixir.CocuWeb.LayoutView, "header.html", assigns %>
+
+
+    <main role="test">
+        <%= if error = get_flash(@conn, :error) do %>
+          <div class="ui negative message" role="alert">
+        <% else %>
+          <div class="ui negative message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= error %>
+            </div>
+          </div>
+
+        <%= if warning = get_flash(@conn, :warning) do %>
+          <div class="ui warning message" role="alert">
+        <% else %>
+          <div class="ui warning message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= warning %>
+            </div>
+          </div>
+        <%= if info = get_flash(@conn, :info) do %>
+          <div class="ui info message" role="alert">
+        <% else %>
+          <div class="ui info message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= info %>
+            </div>
+          </div>
+
+        <%= if success = get_flash(@conn, :success) do %>
+          <div class="ui success message" role="alert">
+        <% else %>
+          <div class="ui success message" role="alert" style="display: none;">
+        <% end %>
+            <i class="close icon"></i>
+            <div class="header">
+              <%= success %>
+            </div>
+          </div>
+          <div class="row">
+          <div class="ui grid sixteen wide column page-not-found centered middle aligned">
+          <div class="four wide column centered middle aligned">
+            <h1>
+              <div class="page">PAGE </div>
+              <div class="not">NOT</div>
+              <div class="found">FOUND!</div>
+            </h1>
+          </div>
+          </div>
+          </div>
+      </div>
+    </main>
+
+    <%= render Elixir.CocuWeb.LayoutView,  "footer.html", assigns %>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDqTj7FTAm7YF7I6bdBi26Co8SpZc6MEs&sensor=false&libraries=places"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </body>
+</html>

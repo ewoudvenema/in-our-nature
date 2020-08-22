@@ -1,0 +1,404 @@
+<div id="community-container">
+
+<!-- community user invitation modal start -->
+<%= if Guardian.Plug.current_resource(@conn) != nil do %>
+  <div class="ui modal" id="community-invite-user-modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Invite a user to
+      <%=@community.name%>
+    </div>
+    <div class="content ui form">
+      <div class="form-group-field">
+        <h4>Email:</h>
+          <input type="text" class="form-control community-invitee-input">
+      </div>
+    </div>
+    <div class="content community-invite-status success">Invitation sent!</div>
+    <div class="content community-invite-status failure">An error occurred!</div>
+    <div class="actions">
+      <div class="ui button invite-community-user-cancel">Cancel</div>
+      <div class="ui button invite-community-user-ok">OK</div>
+    </div>
+  </div>
+<%end%>
+<!-- community user invitation modal end -->
+
+<!-- User list modal start -->
+<%= if Guardian.Plug.current_resource(@conn) != nil do %>
+  <div class="ui coupled first modal" id="community-user-list-modal">
+    <i class="close icon"></i>
+    <div class="header">
+      <%=@community.name%>
+    </div>
+    <div id="community-user-list-content" class="scrolling content">
+      <div class="community-user-list ui items ">
+        <div class="ui segment loader-segment">
+          <div class="ui active inverted dimmer">
+            <div class="ui active text loader">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- User list modal end -->
+
+  <%= if user_is_founder(Guardian.Plug.current_resource(@conn).id, @community.id) do %>
+    <!-- remove user community modal start -->
+    <div class="ui coupled second small modal" id="community-remove-user-modal">
+      <i class="close icon"></i>
+      <div class="header">
+        Remove user
+      </div>
+      <div class="content">
+        Are you sure you want to remove this user?
+      </div>
+      <div class="actions">
+        <div class="meta-user-id meta"></div>
+        <div class="ui button" id="removal-modal-cancel">Cancel</div>
+        <div class="ui button remove-user-confirm" id="removal-modal-ok">OK</div>
+      </div>
+    </div>
+    <!-- remove user community modal end -->
+  <%end%>
+<%end%>
+
+<%= if @community.picture_path != "" do %>
+  <div class="background" style="background: url('<%= @community.picture_path %>') no-repeat bottom center; background-size: cover; background-position: center;">
+<% else %>    
+ <div class="background" style="background: url('/images/universe_mask.jpg') no-repeat bottom center; background-size: cover; background-position: center;">
+ <% end %>
+    <div class="ui center aligned container grid main-banner">
+      <span class="community-name">
+        <%= @community.name %>
+        <%= if Guardian.Plug.current_resource(@conn) != nil && user_is_founder(Guardian.Plug.current_resource(@conn).id, @community.id) do %>
+        <div class="ui dropdown community-admin-options">
+          <i class="ui icon small setting"></i>
+          <div class="menu">
+            <div class="item"><a id="editCommunity" href="/community/<%=@community.id%>/edit">Edit Community</a></div>
+            <div id="get_confirmation_delete_community" class="item">Delete Community</div>
+          </div>
+        </div>
+        <%end%>
+      </span>
+      <div hidden id="community-id"><%=@community.id%></div>
+      <span class="row community-description">
+        <%= @community.description %>
+      </span>
+      <!-- community user section computer only start -->
+      <div id="community-user-section"  class="ui container grid computer only centered">
+        <%= if Guardian.Plug.current_resource(@conn) != nil && !user_is_founder(Guardian.Plug.current_resource(@conn).id, @community.id)  do %>
+          <div id="community-user-follow">
+            <button id="follow-button" class="ui button community-user-follow-button">
+              <%= if user_follows_community(Guardian.Plug.current_resource(@conn).id, @community.id) do %>
+                Following
+              <% else %>
+                Follow
+              <%end%>
+            </button>
+          </div>
+        <%end%>
+        <div id="community-user-options" class="community-description">
+        <div class="community-user-count"><a><i class="users icon"></i><span class="community-user-text"><%=num_followers(@community.id)%> users</span></a></div>
+        <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+          <div class="community-user-count-invite-user"><a><i class="add user icon"></i><span class="community-user-text">Invite someone<span></a></div>
+        <%end%>
+      </div>
+    </div> <!-- community-user-section computer only end -->
+  </div>
+</div> 
+<!-- background image end -->
+
+<!-- community user section mobile only start -->
+<div class="ui grid mobile only one column">
+  <table id="community-user-section-mobile" class="ui celled table ">
+    <tbody>
+      <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+        <tr>
+          <td class="ui segment community-user-follow-button">
+            <%= if user_follows_community(Guardian.Plug.current_resource(@conn).id, @community.id) do %>
+              Following
+            <% else %>
+              Follow
+            <%end%>
+          </td>
+        </tr>
+      <%end%>
+      <tr>
+        <td class="ui segment community-user-count">
+          <i class="users icon"></i>
+          <span class="community-user-text">1288 users</span>
+        </td>
+      </tr>
+      <%= if Guardian.Plug.current_resource(@conn) != nil do %>
+        <tr class="ui accordion" id="community-invite-user-accordion">
+          <td class="ui segment form">
+            <div class="title">
+            <i class="add user icon"></i>
+              <span class="community-user-text">Invite someone</span>
+            </div>
+            <div class="content field">
+              <label>Email</label>
+              <input placeholder="Email" type="text" class="community-invitee-input">
+              <div class="ui submit button invite-community-user-ok">OK</div>
+            </div>
+            <div class="content community-invite-status success">Invitation sent!</div>
+            <div class="content community-invite-status failure">An error occurred!</div>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+<!-- community user section mobile only end -->
+
+
+<!-- project listing start -->
+<div class="ui centered grid container" id="project-title-container">
+  <span class="project-title">
+    Projects
+  </span>
+</div>
+<div class="ui stackable four column grid centered container" id="project-list-container">
+  <%= if Enum.count(@projects) == 0 do %>
+    <span id="no-projects">No Projects</span>
+  <% else %>
+    <%= for project <- @projects do %>
+      <div class="column">
+        <a href="/project/show/<%= project.project_id %>">
+          <div class="ui grid project-div-container">
+            <div class="zoom-effect-container">
+              <div class="row image-card">
+                <img class="ui rounded image project-image" width="280px" height="200px" src="<%= get_project_photo(project.project_id) %>">
+              </div>
+            </div>
+            <div class="row project-div-name">
+              <span class="project-name">
+                <%= project.vision_name %> 
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<!-- project listing end -->
+
+<%= if Enum.count(@projects) >= 10 do %>
+  <div class="load-more-projects ui centered grid container"><h4><a>Load more projects</a></h4></div>
+<%end%>
+
+<div class="ui centered grid container" id="post-title-container">
+  <span class="post-title">
+    Posts
+  </span>
+</div>
+
+<%= if Enum.count(@posts) == 0 do %>
+  <div class="ui centered grid">
+    <span id="no-posts">No Posts, maybe you want to
+      <a id="anchor-to-new-post" href="#new-post">add one</a>
+      !
+    </span>
+  </div>
+<% else %>
+  <div id="add-new-post-container" class="ui container">
+    <a id="anchor-to-new-post" href="#new-post">
+      <i class="add icon"></i>
+      <span id="add-new-post-text">New Post</span>
+    </a>
+  </div>
+  
+  <!-- Post container -->
+  <div class="ui big relaxed divided list accordion container" id="posts-container">
+    <%= for post <- @posts do %>
+      <div class="item title" post-id="<%= post.post_id %>">
+        <!-- post rating and option section computer, tablet and large screen only start -->
+        <div class="right floated content post-right-content">
+          <%= if Guardian.Plug.current_resource(@conn) != nil && post.user_id == Guardian.Plug.current_resource(@conn).id do %>
+            <div class="ui three column grid">
+              <div class="column community-post-options-modal" data-post-id="<%= post.post_id %>">
+                <i class="setting icon"></i>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <!-- post option section computer, tablet and large screen only end -->
+
+        <%= if post.user_photo == nil do %>
+          <img style="height: 35px; width:35px; object-fit: cover;" class="ui mini circular image" src="/images/default-user.png ">
+        <% else %>
+          <img style="height: 35px; width:35px; object-fit: cover;" class="ui mini circular image" src="<%= post.user_photo %>">
+        <% end %>
+
+        <div class="content left-info">
+          <a class="header">
+            <%= post.title %>
+          </a>
+          <div class="description post-content-user">
+            <a href="/user/<%= post.user_id %>">
+              <%= post.user_name %>
+            </a>
+            created
+            <%= elem(Timex.shift(post.date, minutes: 0) |> Timex.format("{relative}", :relative), 1) %>
+              |
+            <a href="#input-reply-post-<%= post.post_id %>" class="anchor-to-new-reply">Reply</a>
+            <!-- post option section mobile only start -->
+            <div class="mobile-div">
+            <%= if Guardian.Plug.current_resource(@conn) != nil && post.user_id == Guardian.Plug.current_resource(@conn).id do %>
+              <div class="community-post-options-modal" post-id="<%= post.post_id %>">
+                <i class="setting icon"></i>
+              </div>
+            <% end %>
+            </div>
+            <!-- post rating and option section mobile only end -->
+          </div>
+        </div>
+      </div>
+      <div class="content">
+      </div>
+      <%= if Enum.count(@posts) >= 10 do %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+    <div class="ui centered grid container load-more-posts">
+      <h4><a>Load more posts</a></h4>
+    </div>
+<!-- Post container end -->
+
+
+<!-- New post section -->
+<%= if Guardian.Plug.current_resource(@conn) != nil do %>
+  <div id="new-post" class="ui form container">
+    <div class="required field">
+      <label>Post Title</label>
+      <input name="post-title" placeholder="Title" type="text" required>
+      <div id="post-title-required" class="ui pointing red basic label" style="display: none;">
+        Please enter something
+      </div>
+    </div>
+    <div class="required field">
+      <label>Post Content</label>
+      <textarea name="post-content" placeholder="Giving me something..." rows="2" required></textarea>
+      <div id="post-content-required" class="ui pointing red basic label" style="display: none;">
+        Please enter something
+      </div>
+    </div>
+    <input type="hidden" name="community-id" value="<%= @community.id %>">
+    <input type="hidden" name="user-id" value="<%= Guardian.Plug.current_resource(@conn).id %>">
+    <button id="submit-new-post" class="ui centered button" type="submit">Submit</button>
+  </div>
+<%end%>
+<!-- New post section end -->
+
+<div id="settings-modal" class="ui modal">
+  <div class="header">Settings</div>
+  <div class="content">
+    <div class="ui grid large screen computer tablet only">
+      <div class="four wide column middle aligned">
+        <span class="modal-letter">Post Title:</span>
+      </div>
+      <div class="twelve wide column ui input no-border">
+        <input type="text" class="project-post-title"></input>
+      </div>
+      <div class="four wide column middle aligned">
+        <span class="modal-letter">Post Content:</span>
+      </div>
+      <div class="twelve wide column ui input no-border">
+        <input type="text" class="project-post-content"></input>
+      </div>
+      <div class="four wide column">
+        <button class="ui centered button edit-project-post" type="submit">Edit</button>
+      </div>
+      <div class="four wide column">
+        <button class="negative ui button delete-project-post" type="submit">Delete Post</button>
+      </div>
+    </div>
+    <div class="ui centered grid mobile only">
+      <div class="row">
+        <span class="modal-letter">Post Title</span>
+      </div>
+      <div class="row ui container input no-border">
+        <input type="text" class="project-post-title"></input>
+      </div>
+      <div class="row">
+        <span class="modal-letter">Post Content</span>
+      </div>
+      <div class="row ui container input no-border">
+        <input type="text" class="project-post-content"></input>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="ui centered button edit-project-post" type="submit">Edit</button>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="negative ui button delete-project-post" type="submit">Delete Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete-confirmation-modal" class="ui mini modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Delete Community
+  </div>
+  <div class="content">
+    <div class="ui grid large screen computer tablet only">
+      <div class="sixteen wide column middle aligned no-border">
+        <div>
+          <span class="modal-letter">Enter Community name</span>
+        </div>
+      </div>
+      <div class="four wide column middle aligned no-border">
+        <div>
+          <span id="span-community-name"class="modal-letter"><%=@community.name%></span>
+        </div>
+      </div>
+      <div class="twelve wide column ui input input-field">
+          <input id="confirmation-input-name" type="text" class="community-name"></input>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="delete_community" class="ui positive right labeled icon button" type="submit" disabled>
+      Confirm
+      <i class="checkmark icon"></i>
+    </button>
+  </div>
+</div>
+
+<div id="reply-settings-modal" class="ui modal">
+  <div class="header">Reply Settings</div>
+  <div class="content">
+    <div class="ui grid large screen computer tablet only">
+      <div class="four wide column middle aligned">
+        <span class="modal-letter">Content:</span>
+      </div>
+      <div class="twelve wide column ui input no-border">
+        <input type="text" class="project-reply-post-content"></input>
+      </div>
+      <div class="four wide column">
+        <button class="ui centered button edit-reply-post" type="submit">Edit</button>
+      </div>
+      <div class="four wide column"> 
+        <button class="negative ui button delete-reply-post" type="submit">Delete</button>
+      </div>
+    </div>
+    <div class="ui centered grid mobile only">
+      <div class="row">
+        <span class="modal-letter">Content</span>
+      </div>
+      <div class="row ui container input no-border">
+        <input type="text" class="project-reply-post-content"></input>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="ui centered button edit-reply-post" type="submit">Edit</button>
+      </div>
+      <div class="sixteen wide column centered aligned">
+        <button class="negative ui button delete-reply-post" type="submit">Delete Post</button>
+      </div>
+    </div>
+  </div>
+</div>

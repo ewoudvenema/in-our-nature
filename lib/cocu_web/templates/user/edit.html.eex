@@ -1,0 +1,3 @@
+
+<%= render "update_profile.html", Map.put(Map.put(Map.put(assigns, :action, user_path(@conn, :update, @user)), :action_password, user_path(@conn, :update_password, @user)), :action_image, user_path(@conn, :update_picture, @user)) %>
+

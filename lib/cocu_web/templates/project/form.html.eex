@@ -1,0 +1,112 @@
+<div id="create-project" class="container ui grid">
+  <div class="sixteen wide column ui form">
+    <%= form_for @changeset, @action,[multipart: true], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+    <div class="form-group field">
+      <label><%= String.upcase(gettext "Vision Name") %> ?</label>
+      <%= text_input f, :vision_name, class: "form-control" %>
+      <label class="error-info"><%= error_tag f, :vision_name %></label>
+    </div>
+    <div class="form-group field">
+      <label><%= String.upcase(gettext "Project Plan") %> ?</label>
+      <%= textarea f, :planning, class: "form-control", rows: 3 %>
+      <label class="error-info"><%= error_tag f, :planning %></label>
+    </div>
+    <div class="form-group field">
+      <label><%= String.upcase(gettext "Vision behind it") %> ? </label>
+      <%= textarea f, :vision, class: "form-control", rows: 3 %>
+      <label class="error-info"><%= error_tag f, :vision %></label>
+    </div>
+    <div class="form-group field">
+      <label><%= String.upcase(gettext "Social Impact") %> ?</label>
+      <%= textarea f, :benefits, class: "form-control", rows: 3 %>
+      <label class="error-info"><%= error_tag f, :benefits %></label>
+    </div>
+    <input id="founder-id-hidden" class="form-control" name="project[founder_id]" value="<%=Guardian.Plug.current_resource(@conn).id%>">
+    <div class="three fields">
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "Fund Asked") %> </label>
+        <div id="fundField" class="ui right labeled input">
+          <label for="amount" class="ui label">$</label>
+          <%= number_input f, :fund_asked, step: "any", class: "form-control" %>
+          <div class="ui basic label">.00</div>
+          <label class="error-info"> <%= error_tag f, :fund_asked %></label>
+        </div>
+      </div>
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "Fund Limit Date")%></label>
+        <div class="ui calendar labeled input" id="calendar">
+          <div class="ui label">
+            <i class="calendar outline icon"></i>
+          </div>
+          <br>
+          <%= text_input f, :fund_limit_date, class: "form-control", type: "text"  %>
+              <label class="error-info"><%= error_tag f, :fund_limit_date %></label>
+        </div>
+      </div>
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "category") %></label>
+        <%= select f, :category_id, Enum.map(@categories, &{String.capitalize(&1.name), &1.id}), class: "ui search dropdown"%>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "Website") %></label>
+        <div class="ui labeled input">
+          <div class="ui label">
+            https://
+          </div>
+          <%= text_input f, :website, class: "form-control" %>
+          <label class="error-info"><%= error_tag f, :website %></label>
+        </div>
+      </div>
+      <div class="form-group field" id="community_search">
+        <label><%= String.upcase(gettext "community") %></label>
+        <%= select f, :community_id, [],class: "ui search dropdown"%>
+        <label class="error-info"><%= error_tag f, :community_id  %></label>
+        </select>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "impact") %></label>
+        <%= select f, :impact, Enum.map(@impacts, fn(x) -> {String.capitalize(x), x}  end), class: "ui search dropdown"%>
+      </div>
+      <div class="form-group field">
+        <label><%= String.upcase(gettext "location") %></label>
+        <%= text_input f, :location, class: "location-margin form-control", rows: 1%>
+        <label class="error-info"><%= error_tag f, :location  %></label>
+      </div>
+    </div>
+    <div id="image_1" class="form-group field images">
+      <label>
+        <div id="p1" class="ui two column grid image_input container">
+          <div class="fourteen wide column"><span><%= String.upcase(gettext "Project Images") %></span></div>
+          <div class="two wide column image-buttons">
+            <span class="ui button remove-image">
+              <i class="minus icon"></i>
+            </span>
+            <span class="ui button add-image">
+              <i class="plus icon"></i>
+          </span>
+          </div>
+        </div>
+      </label>
+      <div id="p1" class="ui two column grid image_input container">
+        <%= file_input f, :project_picture_1, class: "form-control"%>
+      </div>
+      <label class="error-info"><%= error_tag f, :project_picture %></label>
+    </div>
+    <div class="ui labeled input">
+      <div class="ui center aligned segment form-group">
+        <% var = String.upcase(gettext "Submit")%>
+        <%= submit var, class: "ui centered aligned button" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
