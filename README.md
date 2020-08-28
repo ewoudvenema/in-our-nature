@@ -1,4 +1,4 @@
-# Co-creative Universe
+#in our nature
 
 To start your Phoenix app:
 
