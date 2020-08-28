@@ -161,6 +161,5 @@ Growth potential: replicable and scalable.
 
 If you have additional information to refer, please add the URL's and links here, so
 that we can access them and download. If needed, add respective credentials here as well.
-http://creatingnewrealities.co
+http://www.in-our-nature.org
 
-https://ewoudvenema2.wixsite.com/cocreativeuniverse
